@@ -16,34 +16,6 @@ export default function NavigationBar() {
             <div className="container flex h-14 items-center space-x-0 sm:justify-between">
                 <div className="flex items-center">
                     <div id="icon" className="pr-2">
-                        {/*<svg width="24" height="24" fill={theme === "dark" ? "#FFFFFF" : "#100F13"}*/}
-                        {/*     xmlns="http://www.w3.org/2000/svg" enableBackground="new 0 0 100 100" version="1.1">*/}
-                        {/*    <path*/}
-                        {/*        d="m12.00753,0.01261c-6.61961,0 -11.98529,5.36075 -11.98529,11.97368c0,6.61293 5.36568,11.97341 11.98529,11.97341c6.61934,0 11.98529,-5.36048 11.98529,-11.97341c0,-6.61293 -5.36595,-11.97368 -11.98529,-11.97368zm-2.82427,4.17163c-0.06738,0.62183 -1.46673,0.99781 -2.53955,2.16537c-1.16817,1.07178 -1.5445,2.4695 -2.16747,2.53682c-0.67064,0.18706 -1.58153,-2.16484 0.46583,-4.23655c2.07399,-2.04564 4.4287,-1.1359 4.2412,-0.46564z"/>*/}
-                        {/*</svg>*/}
-
-                        {/*<svg width="38" height="38" fill={theme === "dark" ? "#FFFFFF" : "#100F13"}*/}
-                        {/*    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 125" version="1.1" x="0px" y="0px">*/}
-                        {/*    <g transform="matrix(0.98888889,0,0,0.98888889,50,50)">*/}
-                        {/*        <g>*/}
-                        {/*            <path*/}
-                        {/*                d="M 42.198994,15.628642 A 44.316349,38.380085 0 0 1 5.2270675e-7,42.287169 44.316349,38.380085 0 0 1 -42.198994,15.628643"*/}
-                        {/*                fill="none" stroke={theme === "dark" ? "#FFFFFF" : "#100F13"} strokeWidth="2.81123595"/>*/}
-                        {/*            <path*/}
-                        {/*                d="m 42.198995,-15.628641 a 44.316349,38.380085 0 0 1 -16.195852,42.800197 44.316349,38.380085 0 0 1 -52.006288,-10e-7 44.316349,38.380085 0 0 1 -16.195849,-42.800197"*/}
-                        {/*                fill="none" stroke={theme === "dark" ? "#FFFFFF" : "#100F13"} strokeWidth="2.81123595"/>*/}
-                        {/*            <ellipse cx="0" cy="-11.25" rx="38.971142" ry="33.750999" fill="none"*/}
-                        {/*                     stroke={theme === "dark" ? "#FFFFFF" : "#100F13"} strokeWidth="2.81123595"/>*/}
-                        {/*            <ellipse cx="0" cy="-17.236" rx="28.925442" ry="25.051168" fill="none"*/}
-                        {/*                     stroke={theme === "dark" ? "#FFFFFF" : "#100F13"} strokeWidth="2.81123595"/>*/}
-                        {/*            <ellipse cx="0" cy="-21.143084" rx="15.390906" ry="13.329916" fill="none"*/}
-                        {/*                     stroke={theme === "dark" ? "#FFFFFF" : "#100F13"} strokeWidth="2.81123595"/>*/}
-                        {/*        </g>*/}
-                        {/*        <circle cx="0" cy="0" r="45" fill="none" stroke={theme === "dark" ? "#FFFFFF" : "#100F13"}*/}
-                        {/*                strokeWidth="2.81123595"/>*/}
-                        {/*    </g>*/}
-                        {/*</svg>*/}
-
                         <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"
                              enableBackground="new 0 0 100 100"
                              fill={theme === "dark" ? "#FFFFFF" : "#100F13"}
@@ -81,7 +53,7 @@ export default function NavigationBar() {
                     </h1>
                 </div>
 
-                <div className="flex justify-center items-center pl-6 gap-6 text-sm">
+                <div className="container flex justify-center items-center pl-6 gap-6 text-sm">
                     <Link
                         href="/test"
                         rel="noreferrer"
