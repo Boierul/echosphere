@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import NavigationBar from "@/app/components/NavigationBar";
+import NavigationBar from "@/components/NavigationBar";
 
 export default function ModeToggle() {
     return (

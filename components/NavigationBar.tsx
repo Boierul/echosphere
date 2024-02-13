@@ -1,10 +1,10 @@
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-
-import {Button} from "@/components/ui/button";
 import {useTheme} from "next-themes";
+import {Button} from "@/components/ui/button";
 
-import ThemeToggle from "@/app/components/ThemeToggle";
+import ThemeToggle from "@/components/ThemeToggle";
+import MobileNavigation from "@/components/MobileNavigation";
 
 export default function NavigationBar() {
     const pathname = usePathname()
@@ -12,10 +12,14 @@ export default function NavigationBar() {
     const {theme, setTheme} = useTheme();
 
     return (
-        <header className="bg-background sticky top-0 z-40 w-full border-b border-zinc-100 dark:border-zinc-900">
+        <header className="bg-background sticky top-0 z-40 w-full transition-all border-b border-zinc-100 dark:border-zinc-900">
             <div className="container flex h-14 items-center space-x-0 sm:justify-between">
+                <div className="block md:hidden">
+                    <MobileNavigation/>
+                </div>
+
                 <div className="flex items-center">
-                    <div id="icon" className="pr-2">
+                    <div id="icon" className="pr-2 hidden sm:block">
                         <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"
                              enableBackground="new 0 0 100 100"
                              fill={theme === "dark" ? "#FFFFFF" : "#100F13"}
@@ -48,12 +52,12 @@ export default function NavigationBar() {
                             </g>
                         </svg>
                     </div>
-                    <h1 id="logo-text" className="font-bold font-lg">
+                    <h1 id="logo-text" className="font-bold font-lg ml-6 sm:ml-0">
                         Echosphere.
                     </h1>
                 </div>
 
-                <div className="container flex justify-center items-center pl-6 gap-6 text-sm">
+                <div className="container flex justify-center items-center pl-6 gap-6 text-sm hidden sm:flex">
                     <Link
                         href="/test"
                         rel="noreferrer"
