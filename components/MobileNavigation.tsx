@@ -82,11 +82,11 @@ export default function MobileNavigation() {
         <motion.nav
             initial={false}
             animate={isOpen ? 'open' : 'closed'}
-            className={`fixed inset-0 z-50 w-full sm:hidden  ${isOpen ? 'backdrop-filter backdrop-blur-sm transition duration-200' : 'pointer-events-none transition duration-200'}`}
+            className={`fixed inset-0 z-50 w-full h-full sm:hidden  ${isOpen ? 'backdrop-filter backdrop-blur-xl transition duration-200' : 'pointer-events-none transition duration-200'}`}
             ref={containerRef}
         >
             <motion.div
-                className={`absolute h-full w-full bg-opacity-60`}
+                className={`absolute h-full w-full bg-opacity-60 `}
                 variants={sidebar}
             >
                 <motion.ul
@@ -97,19 +97,19 @@ export default function MobileNavigation() {
                         <Link
                             href="/"
                             onClick={() => toggleOpen()}
-                            className={`flex w-full pb-2 text-5xl ${pathname === "/test" ? "font-semibold" : "font-light"}`}
+                            className={`flex w-full pb-2 text-5xl ${pathname === "/" ? "font-semibold" : "font-light"}`}
                         >
                             Home
                         </Link>
                         <Link
-                            href="/"
+                            href="/feed"
                             onClick={() => toggleOpen()}
                             className={`flex w-full pb-2 text-5xl ${pathname === "/feed" ? "font-semibold" : "font-light"}`}
                         >
                             Feed
                         </Link>
                         <Link
-                            href="/"
+                            href="/subscribe"
                             onClick={() => toggleOpen()}
                             className={`flex w-full pb-2 text-5xl ${pathname === "/subscribe" ? "font-semibold" : "font-light"}`}
                         >

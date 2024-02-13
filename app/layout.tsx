@@ -1,11 +1,12 @@
 import "./globals.css";
 
 import React from "react";
-import { GeistSans } from 'geist/font/sans';
+import {GeistSans} from 'geist/font/sans';
 import type {Metadata} from "next";
 import {Inter} from "next/font/google";
 
 import {ThemeProvider} from "@/providers/ThemeProvider";
+import NavigationBar from "@/components/NavigationBar";
 
 // const inter = Inter({subsets: ["latin"]});
 
@@ -38,6 +39,7 @@ export default function RootLayout({children,}: Readonly<{ children: React.React
             enableSystem
             // disableTransitionOnChange
         >
+            <NavigationBar/>
             {children}
         </ThemeProvider>
         </body>

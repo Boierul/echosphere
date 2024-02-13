@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {useTheme} from "next-themes";
@@ -12,7 +14,7 @@ export default function NavigationBar() {
     const {theme, setTheme} = useTheme();
 
     return (
-        <header className="bg-background sticky top-0 z-40 w-full transition-all border-b border-zinc-100 dark:border-zinc-900">
+        <header className="bg-background fixed top-0 z-40 w-full transition-all border-b border-zinc-100 dark:border-zinc-900">
             <div className="container flex h-14 items-center space-x-0 sm:justify-between">
                 <div className="block md:hidden">
                     <MobileNavigation/>
@@ -59,15 +61,15 @@ export default function NavigationBar() {
 
                 <div className="container flex justify-center items-center pl-6 gap-6 text-sm hidden sm:flex">
                     <Link
-                        href="/test"
+                        href="/"
                         rel="noreferrer"
-                        className={`hover:text-stone-600 dark:hover:text-stone-300 ${pathname === "/test" ? "font-normal" : "text-stone-400"}`}
+                        className={`hover:text-stone-600 dark:hover:text-stone-300 ${pathname === "/" ? "font-normal" : "text-stone-400"}`}
                     >
                         <span>Home</span>
                     </Link>
                     <Link
                         href="/feed"
-                        target="_blank"
+                        // target="_blank"
                         rel="noreferrer"
                         className={`hover:text-stone-600 dark:hover:text-stone-300 ${pathname === "/feed" ? "font-normal" : "text-stone-400"}`}
                     >
