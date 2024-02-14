@@ -9,7 +9,9 @@ import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import TechnologiesCardsV2 from "@/app/(home)/components/TechnologiesCardsV2";
 import {StarRatingInterface} from "@/types/StarRatingInterface"
     ;
-export default function HomePage({numStars}:StarRatingInterface) {
+import TechnologiesCards from "@/app/(home)/legacy/TechnologiesCards";
+
+export default function HomePage({numStars}: StarRatingInterface) {
     const {theme, setTheme} = useTheme();
 
     return (
@@ -102,14 +104,16 @@ export default function HomePage({numStars}:StarRatingInterface) {
                     </div>
                 </div>
 
-                {/*<div>*/}
-                {/*<p className="text-3xl font-medium">Features</p>*/}
-                {/*<TechnologiesCards/>*/}
-                {/*</div>*/}
-
                 <Spacer/>
                 <TechnologiesCardsV2/>
                 <Spacer/>
+
+                {/*<div>*/}
+                {/*    <p className="text-3xl font-medium">Features</p>*/}
+                {/*    <TechnologiesCards/>*/}
+                {/*    <Spacer/>*/}
+                {/*</div>*/}
+
 
             </div>
         </div>

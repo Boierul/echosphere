@@ -115,6 +115,18 @@ export default function TechnologiesCardsV2() {
             ),
         },
         {
+            title: "Vercel",
+            description: "Frontend Cloud to deploy web-applications.",
+            footer: "Front-end deployment",
+            url: "https://vercel.com/docs",
+            svg: (
+                <svg fill="#000000" width="128" height="128" viewBox="0 0 512 512"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" d="M256,48,496,464H16Z"/>
+                </svg>
+            ),
+        },
+        {
             title: "Shadcn UI",
             description:
                 "Components built with shadcn/ui.",
@@ -163,7 +175,7 @@ export default function TechnologiesCardsV2() {
             ),
         },
         {
-            title: "Theme",
+            title: "Themes",
             description: "Theme switching implemented using next-themes.",
             footer: "next-themes documentation",
             url: "https://github.com/pacocoursey/next-themes/blob/main/README.md",
@@ -254,7 +266,7 @@ export default function TechnologiesCardsV2() {
                     />
                 </svg>
             ),
-        },
+        }
     ];
 
     const size = useWindowSize();
