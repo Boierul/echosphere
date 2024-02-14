@@ -1,22 +1,17 @@
-"use client"
-
-import * as React from "react"
-import Spacer from "@/components/Spacer";
+import React from "react";
 import AddPostSkeleton from "@/app/feed/components/skeleton/AddPostSkeleton";
 import FeedPostsSkeleton from "@/app/feed/components/skeleton/FeedPostsSkeleton";
 
-export default function ModeToggle() {
+export default function Loading() {
     return (
         <main>
-            <Spacer/>
+            <div className="container mx-auto px-6 sm:px-8 md:px-16 lg:px-20 max-w-3xl mt-6 items-center">
 
-            <div className="container max-w-2xl mt-10 items-center">
-
-                <h1 className="font-bold text-stone-500 text-6xl mb-4 animate-pulse">
+                <h1 className="font-bold text-5xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-pink-500">
                     Feed
                 </h1>
 
-                <div className="mb-12">
+                <div>
                     <AddPostSkeleton/>
                 </div>
 

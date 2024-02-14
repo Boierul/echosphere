@@ -1,7 +1,8 @@
 import Spacer from "@/components/Spacer";
 import AddPost from "@/app/feed/components/AddPost";
+import Feed from "@/app/feed/components/Feed";
 
-export default async function Feed() {
+export default async function FeedPage() {
     // const [postsData] = await Promise.all([getAllPosts()])
 
     return (
@@ -15,11 +16,14 @@ export default async function Feed() {
                     Feed
                 </h1>
 
-                <AddPost/>
-
-                <Spacer/>
+                <div className="mb-12">
+                    <AddPost/>
+                </div>
 
                 {/*<Feed posts={postsData}/>*/}
+                <div>
+                    <Feed/>
+                </div>
             </div>
         </main>
     )

@@ -180,7 +180,7 @@ export default function AddPost() {
                     />
                 </div>
 
-                <div className="row flex-wrap flex items-center w-full justify-between gap-3">
+                <div className="flex-wrap flex items-center w-full justify-between gap-3">
                     <Button
                         className="font-medium flex-1"
                         color="secondary"
