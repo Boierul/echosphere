@@ -6,6 +6,9 @@ import {Button} from "@/components/ui/button";
 
 import {useTheme} from "next-themes";
 import {TechnologiesCardInterface} from "@/types/TechnologiesCardInterface";
+import {useEffect} from "react";
+import VanillaTilt from "vanilla-tilt";
+import useWindowSize from "@/hooks/useWindowSize";
 
 export default function TechnologiesCardsV2() {
     const {theme, setTheme} = useTheme();
@@ -89,8 +92,8 @@ export default function TechnologiesCardsV2() {
             ),
         },
         {
-            title: "Railway DB",
-            description: "PostgreSQL database deployed on Railway.",
+            title: "Railway",
+            description: "PostgreSQL database deployed on Railway Cloud.",
             footer: "Provision database on Railway",
             url: "https://railway.app/new",
             svg: (
@@ -206,8 +209,8 @@ export default function TechnologiesCardsV2() {
                     // fill="none"
                     stroke={theme === "dark" ? "#000000" : "#FFFFFF"}
                     strokeWidth="1"
-                    className="h-28 w-28 fill-current"
-                    style={{height: 120}}
+                    className="h-32 w-32 fill-current"
+                    style={{height: 150}}
                     fill={theme === "dark" ? "#FFFFFF" : "#100F13"}
                 >
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
@@ -254,13 +257,29 @@ export default function TechnologiesCardsV2() {
         },
     ];
 
+    const size = useWindowSize();
+
+    useEffect(() => {
+        // @ts-ignore
+        VanillaTilt.init(document.querySelectorAll('#card, #card-button'), {
+            max: 12.5,
+            speed: 300,
+            glare: true,
+            "max-glare": 0.25,
+            "scale": 1.1,
+            reverse: true,
+            perspective: 1000,
+            gyroscope: true
+        });
+    }, []);
+
     return (
         <div className="container flex justify-center items-center max-w-8xl flex-wrap z-10 gap-8">
             {cardItems.map((item, i) => (
-                <div key={i}>
+                <div key={i} id="card">
                     <div className="relative w-64 h-96 m-30 rounded-lg border-1 border-t
                                     border-l border-white border-opacity-10 shadow-2xl backdrop-blur-5 bg-white
-                                    bg-opacity-5 flex justify-center items-center z-10">
+                                    bg-opacity-60 flex justify-center items-center z-10 dark:bg-opacity-10">
                         <h2 className="absolute top-8 right-8
                                        pointer-events-none opacity-10">
                             {item.svg}
@@ -268,18 +287,18 @@ export default function TechnologiesCardsV2() {
 
                         <div className="flex flex-col items-center px-8 w-2xl h-48">
                             {/*<h3 className="text-3xl text-white z-10" >*/}
-                            <h3 className="text-4xl z-10 text-stone-700 dark:text-stone-200 mt-4">
+                            <h3 className="select-none font-bold text-4xl z-10 text-neutral-600 dark:text-stone-200 mt-4">
                                 {item.title}
                             </h3>
 
-                            <p className="mt-3 mb-3 text-stone-600 text-center text-opacity-80 dark:text-stone-300">
+                            <p className="select-none mt-3 mb-3 text-stone-600 text-center text-opacity-80 dark:text-stone-300">
                                 {item.description}
                             </p>
 
-                            <Button variant="default"
+                            <Button id="card-button" variant="default"
                                     className="w-48 absolute bottom-16">
                                 <Link target="_blank"
-                                      href="/"
+                                      href={item.url}
                                       className="text-sm">
                                     Documentation
                                 </Link>
@@ -288,7 +307,6 @@ export default function TechnologiesCardsV2() {
                     </div>
                 </div>
             ))}
-
         </div>
     )
 }
