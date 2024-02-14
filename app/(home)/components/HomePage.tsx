@@ -60,9 +60,10 @@ export default function HomePage({numStars}: StarRatingInterface) {
                         {/*Welcome{user && `, ${user.name}`}!*/}
                         Welcome to Echosphere
                     </h1>
-                    <h2 className="text-2xl font-light">
-                        Full-stack webapplication that lets the users share their ideas online
-                    </h2>
+
+                        <h2 className="container px-0 text-md font-light sm:text-2xl px-32">
+                            Full-stack web-application that lets the users share their ideas online
+                        </h2>
                 </div>
 
                 <div className="pt-4 flex flex-wrap space-x-4 justify-center items-center">
