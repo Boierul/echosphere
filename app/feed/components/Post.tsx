@@ -24,7 +24,7 @@ export default function Post() {
                 <div className="flex justify-between w-full">
                     <div className="pl-4">
                         <div className="font-bold">Dan Pintea</div>
-                        <div className="text-sm text-stone-500">
+                        <div className="text-xs text-stone-500 sm:text-sm">
                             {/*{formatDate(createdAt)}*/}
                             February 6, 2024 at 12:08 AM
                         </div>
@@ -38,13 +38,13 @@ export default function Post() {
                                 <DotsHorizontalIcon/>
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-44">
+                        <DropdownMenuContent className="w-20 sm:w-44">
                             <DropdownMenuLabel>Username</DropdownMenuLabel>
                             <DropdownMenuSeparator/>
                             <DropdownMenuGroup>
                                 <DropdownMenuItem className="cursor-pointer">
                                     Delete post
-                                    <DropdownMenuShortcut>⇧⌘D</DropdownMenuShortcut>
+                                    <DropdownMenuShortcut className="hidden sm:block">⇧⌘D</DropdownMenuShortcut>
                                 </DropdownMenuItem>
                             </DropdownMenuGroup>
                         </DropdownMenuContent>

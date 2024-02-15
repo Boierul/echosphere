@@ -61,7 +61,7 @@ export default function HomePage({numStars}: StarRatingInterface) {
                         Welcome to Echosphere
                     </h1>
 
-                        <h2 className="container px-0 text-md font-light sm:text-2xl px-32">
+                        <h2 className="container text-md font-light sm:text-2xl">
                             Full-stack web-application that lets the users share their ideas online
                         </h2>
                 </div>
