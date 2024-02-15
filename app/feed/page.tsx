@@ -20,8 +20,8 @@ export default async function FeedPage() {
                     <AddPost/>
                 </div>
 
-                {/*<Feed posts={postsData}/>*/}
                 <div>
+                    {/*<Feed posts={postsData}/>*/}
                     <Feed/>
                 </div>
             </div>
