@@ -8,13 +8,12 @@ export default function Loading() {
         <main>
             <Spacer/>
 
-            <div className="container mx-auto px-6 sm:px-8 md:px-16 lg:px-20 max-w-3xl mt-6 items-center">
-
-                <h1 className="font-bold text-5xl">
+            <div className="container max-w-2xl mt-10 items-center ">
+                <h1 className="font-bold text-6xl mb-4 animate-pulse">
                     Feed
                 </h1>
 
-                <div>
+                <div className="mb-8">
                     <AddPostSkeleton/>
                 </div>
 

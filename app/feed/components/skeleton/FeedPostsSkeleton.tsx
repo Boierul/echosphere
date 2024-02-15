@@ -13,18 +13,19 @@ const FeedPostsSkeleton = () => {
                         <div className="w-12 h-12 bg-zinc-100 rounded-full">
                         </div>
 
-                        <div className="flex justify-between w-full">
+                        <div className="flex justify-between w-10/12">
                             <div className="pl-4">
                                 <div
-                                    className="mb-1 w-60 rounded-md text-transparent bg-zinc-100 dark:bg-zinc-800">Username
+                                    className="mb-1 w-32 rounded-md text-transparent bg-zinc-100 dark:bg-zinc-800 sm:w-60">Username
                                 </div>
                                 <div
-                                    className="text-sm text-transparent w-60 rounded-md bg-zinc-100 dark:bg-zinc-800">Date
+                                    className="text-sm text-transparent w-32 rounded-md bg-zinc-100 dark:bg-zinc-800 sm:w-60">Date
                                 </div>
                             </div>
 
                             <Button variant="ghost" disabled={true} style={{
-                                marginTop: "-4px"
+                                marginTop: "-4px",
+                                marginRight: "-12px"
                             }}>
                                 <DotsHorizontalIcon/>
                             </Button>
@@ -40,13 +41,17 @@ const FeedPostsSkeleton = () => {
                         </p>
                     </div>
 
-                    <div className="p-4 flex gap-3 items-center">
+                    <div className="p-4 flex gap-1 items-center">
                         <p className="rounded-md text-transparent bg-zinc-100 dark:bg-zinc-800 text-sm">
-                            Likes No.
+                            Likes
                         </p>
 
                         <p className="rounded-md text-transparent bg-zinc-100 dark:bg-zinc-800 text-sm">
-                            Comments No.
+                            Comm
+                        </p>
+
+                        <p className="rounded-md text-transparent bg-zinc-100 dark:bg-zinc-800 text-sm">
+                            Delete post
                         </p>
                     </div>
                 </Card>

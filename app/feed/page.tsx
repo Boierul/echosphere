@@ -16,7 +16,7 @@ export default async function FeedPage() {
                     Feed
                 </h1>
 
-                <div className="mb-12">
+                <div className="mb-8">
                     <AddPost/>
                 </div>
 
