@@ -2,32 +2,32 @@
 
 import * as React from "react"
 import Spacer from "@/components/Spacer";
-import AddPostSkeleton from "@/app/feed/components/skeleton/AddPostSkeleton";
-import FeedPostsSkeleton from "@/app/feed/components/skeleton/FeedPostsSkeleton";
 import AddPost from "@/app/feed/components/AddPost";
-import Feed from "@/app/feed/components/Feed";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {
     DropdownMenu,
-    DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
     DropdownMenuLabel,
-    DropdownMenuSeparator, DropdownMenuShortcut,
+    DropdownMenuSeparator,
+    DropdownMenuShortcut,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
-import {DotsHorizontalIcon} from "@radix-ui/react-icons";
+import {ChatBubbleIcon, DotsHorizontalIcon, HeartIcon, TrashIcon} from "@radix-ui/react-icons";
 import Link from "next/link";
 import {Card} from "@/components/ui/card";
 import {
-    Drawer, DrawerClose,
+    Drawer,
+    DrawerClose,
     DrawerContent,
-    DrawerDescription, DrawerFooter,
+    DrawerDescription,
     DrawerHeader,
     DrawerTitle,
     DrawerTrigger
 } from "@/components/ui/drawer";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
-import useWindowSize from "@/hooks/useWindowSize";
 import {
     Dialog,
     DialogContent,
@@ -36,37 +36,16 @@ import {
     DialogTitle,
     DialogTrigger
 } from "@/components/ui/dialog";
-import {Label} from "@/components/ui/label";
 
 export default function ModeToggle() {
     const [open, setOpen] = React.useState(false)
     const isDesktop = useMediaQuery("(min-width: 768px)")
-
-    // if (isDesktop) {
-    //     return (
-    //         <Dialog open={open} onOpenChange={setOpen}>
-    //             <DialogTrigger asChild>
-    //                 <Button variant="outline">Edit Profile</Button>
-    //             </DialogTrigger>
-    //             <DialogContent className="sm:max-w-[425px]">
-    //                 <DialogHeader>
-    //                     <DialogTitle>Edit profile</DialogTitle>
-    //                     <DialogDescription>
-    //                         Make changes to your profile here. Click save when you are done.
-    //                     </DialogDescription>
-    //                 </DialogHeader>
-    //                 <ProfileForm />
-    //             </DialogContent>
-    //         </Dialog>
-    //     )
-    // }
 
     return (
         <main>
             <Spacer/>
 
             <div className="container max-w-2xl mt-10 items-center">
-
                 <h1 className="font-bold text-6xl mb-4">
                     Feed
                 </h1>
@@ -107,9 +86,19 @@ export default function ModeToggle() {
                                         <DropdownMenuSeparator/>
                                         <DropdownMenuGroup>
                                             <DropdownMenuItem className="cursor-pointer">
-                                                Delete post
+                                                Archive
                                                 <DropdownMenuShortcut
-                                                    className="hidden sm:block">⇧⌘D</DropdownMenuShortcut>
+                                                    className="hidden sm:block">⇧⌘A</DropdownMenuShortcut>
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem className="cursor-pointer">
+                                                Edit post
+                                                <DropdownMenuShortcut
+                                                    className="hidden sm:block">⇧⌘E</DropdownMenuShortcut>
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem className="cursor-pointer">
+                                                Settings
+                                                <DropdownMenuShortcut
+                                                    className="hidden sm:block">⇧⌘S</DropdownMenuShortcut>
                                             </DropdownMenuItem>
                                         </DropdownMenuGroup>
                                     </DropdownMenuContent>
@@ -117,7 +106,7 @@ export default function ModeToggle() {
                             </div>
                         </div>
 
-                        <div id="card-body" className="p-4">
+                        <div id="card-body" className="p-4 py-2">
                             {/*<Link href={`/posts/${id}`}>*/}
                             <Link href="/">
                                 <p className="pr-4">
@@ -127,54 +116,68 @@ export default function ModeToggle() {
                             </Link>
                         </div>
 
-                        <div id="card-footer" className="p-4 flex gap-3 items-center">
-                            <p className="text-stone-500 text-sm">
-                                {/*{comments.length} {comments.length === 1 ? "comment" : "comments"}*/}
-                                0 likes
-                            </p>
-                            {/*<HeartIcon/>*/}
+                        <div className="flex px-4 items-center gap-3 mb-4">
+                            <div className="flex hover:text-stone-400 cursor-pointer items-center">
+                                <HeartIcon/>
+                                {/*            /!*{comments.length} {comments.length === 1 ? "comment" : "comments"}*!/*/}
+                                <p className="pl-2 text-sm">0</p>
+                            </div>
 
-                            <p className="text-stone-500 text-sm">
-                                {/*{comments.length} {comments.length === 1 ? "comment" : "comments"}*/}
-                                0 comments
-                            </p>
+                            <div className="flex hover:text-stone-400 cursor-pointer items-center">
+                                <ChatBubbleIcon/>
+                                {/*            /!*{comments.length} {comments.length === 1 ? "comment" : "comments"}*!/*/}
+                                <p className="pl-2 text-sm">0</p>
+                            </div>
 
+                            {
+                                isDesktop ?
+                                    <Dialog open={open} onOpenChange={setOpen}>
+                                        <DialogTrigger asChild>
+                                            <div className="flex hover:text-stone-400 cursor-pointer items-center">
+                                                <TrashIcon/>
+                                                <p className="pl-1 text-sm">Delete</p>
+                                            </div>
+                                        </DialogTrigger>
+                                        <DialogContent className="sm:max-w-[610px] h-52">
+                                            <DialogHeader className="mt-6">
+                                                <DialogTitle className="text-xl">Delete post</DialogTitle>
+                                                <DialogDescription className="text-md">
+                                                    This action will permanently delete this post
+                                                </DialogDescription>
+                                                <div className="flex flex-row gap-3">
+                                                    <Button type="submit" className="flex-1 mt-6">Delete</Button>
+                                                    <Button variant="outline"
+                                                            className="flex-1 mt-6">Cancel</Button>
+                                                </div>
+                                            </DialogHeader>
+                                        </DialogContent>
+                                    </Dialog>
+                                    :
+                                    <Drawer open={open} onOpenChange={setOpen}>
+                                        <DrawerTrigger asChild>
+                                            <div className="flex hover:text-stone-400 cursor-pointer items-center">
+                                                <TrashIcon/>
+                                                <p className="pl-1 text-sm">Delete</p>
+                                            </div>
+                                        </DrawerTrigger>
+                                        <DrawerContent className="h-72">
+                                            <DrawerHeader className="text-left mt-8">
+                                                <DrawerTitle>Delete post</DrawerTitle>
+                                                <DrawerDescription>
+                                                    This action will permanently delete this post
+                                                </DrawerDescription>
+                                            </DrawerHeader>
+                                            <form className="grid items-start gap-2 px-4">
+                                                <Button type="submit">Delete</Button>
+                                                <DrawerClose asChild>
+                                                    <Button variant="outline">Cancel</Button>
+                                                </DrawerClose>
+                                            </form>
+                                        </DrawerContent>
+                                    </Drawer>
+                            }
                         </div>
                     </Card>
-
-                    {/*<Drawer>*/}
-                    {/*    <DrawerTrigger asChild>*/}
-                    {/*        <Button variant="outline">Open Drawer</Button>*/}
-                    {/*    </DrawerTrigger>*/}
-                    {/*    <DrawerContent>*/}
-                    {/*        <div className="mx-auto w-full max-w-sm">*/}
-                    {/*            <DrawerHeader>*/}
-                    {/*                <DrawerTitle>Move Goal</DrawerTitle>*/}
-                    {/*                <DrawerDescription>Set your daily activity goal.</DrawerDescription>*/}
-                    {/*            </DrawerHeader>*/}
-                    {/*        </div>*/}
-                    {/*    </DrawerContent>*/}
-                    {/*</Drawer>*/}
-
-                    <Drawer open={open} onOpenChange={setOpen}>
-                        <DrawerTrigger asChild>
-                            <Button variant="outline">Edit Profile</Button>
-                        </DrawerTrigger>
-                        <DrawerContent className="h-72">
-                            <DrawerHeader className="text-left mt-8">
-                                <DrawerTitle>Delete post</DrawerTitle>
-                                <DrawerDescription>
-                                    This action will permanently delete this post
-                                </DrawerDescription>
-                            </DrawerHeader>
-                            <form className="grid items-start gap-2 px-4">
-                                <Button type="submit">Delete</Button>
-                                <DrawerClose asChild>
-                                    <Button variant="outline">Cancel</Button>
-                                </DrawerClose>
-                            </form>
-                        </DrawerContent>
-                    </Drawer>
 
                 </div>
             </div>
