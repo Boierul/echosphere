@@ -1,18 +1,44 @@
-import {Card, CardHeader} from "@/components/ui/card";
+"use client"
+
+import {Card} from "@/components/ui/card";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import {formatDate} from "@/utils/formatDate";
 import {Button} from "@/components/ui/button";
-import {DotsHorizontalIcon, HeartIcon} from "@radix-ui/react-icons";
+import {ChatBubbleIcon, DotsHorizontalIcon, HeartIcon, TrashIcon} from "@radix-ui/react-icons";
 import {
     DropdownMenu,
-    DropdownMenuContent, DropdownMenuGroup,
+    DropdownMenuContent,
+    DropdownMenuGroup,
     DropdownMenuItem,
-    DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuShortcut,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import * as React from "react";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger
+} from "@/components/ui/dialog";
+import {
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger
+} from "@/components/ui/drawer";
+import {useMediaQuery} from "@/hooks/useMediaQuery";
 
 export default function Post() {
+    const [open, setOpen] = React.useState(false)
+    const isDesktop = useMediaQuery("(min-width: 768px)")
+
     return (
         <Card className="p-2 my-4 rounded-lg">
             <div id="card-header" className="flex flex-row items-center p-4">
@@ -23,7 +49,7 @@ export default function Post() {
 
                 <div className="flex justify-between w-full">
                     <div className="pl-4">
-                        <div className="font-bold">Dan Pintea</div>
+                        <div className="font-bold text-sm sm:text-lg">Dan Pintea</div>
                         <div className="text-xs text-stone-500 sm:text-sm">
                             {/*{formatDate(createdAt)}*/}
                             February 6, 2024 at 12:08 AM
@@ -33,7 +59,8 @@ export default function Post() {
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant="ghost" style={{
-                                marginTop: "-4px"
+                                marginTop: "-4px",
+                                marginRight: "-12px"
                             }}>
                                 <DotsHorizontalIcon/>
                             </Button>
@@ -43,8 +70,19 @@ export default function Post() {
                             <DropdownMenuSeparator/>
                             <DropdownMenuGroup>
                                 <DropdownMenuItem className="cursor-pointer">
-                                    Delete post
-                                    <DropdownMenuShortcut className="hidden sm:block">⇧⌘D</DropdownMenuShortcut>
+                                    Archive
+                                    <DropdownMenuShortcut
+                                        className="hidden sm:block">⇧⌘A</DropdownMenuShortcut>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem className="cursor-pointer">
+                                    Edit post
+                                    <DropdownMenuShortcut
+                                        className="hidden sm:block">⇧⌘E</DropdownMenuShortcut>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem className="cursor-pointer">
+                                    Settings
+                                    <DropdownMenuShortcut
+                                        className="hidden sm:block">⇧⌘S</DropdownMenuShortcut>
                                 </DropdownMenuItem>
                             </DropdownMenuGroup>
                         </DropdownMenuContent>
@@ -52,7 +90,7 @@ export default function Post() {
                 </div>
             </div>
 
-            <div id="card-body" className="p-4">
+            <div id="card-body" className="p-4 py-2">
                 {/*<Link href={`/posts/${id}`}>*/}
                 <Link href="/">
                     <p className="pr-4">
@@ -62,18 +100,66 @@ export default function Post() {
                 </Link>
             </div>
 
-            <div id="card-footer" className="p-4 flex gap-3 items-center">
-                <p className="text-stone-500 text-sm">
+            <div className="flex px-4 items-center gap-3 mb-4">
+                <div className="flex hover:text-stone-400 cursor-pointer items-center">
+                    <HeartIcon/>
                     {/*{comments.length} {comments.length === 1 ? "comment" : "comments"}*/}
-                    0 likes
-                </p>
-                {/*<HeartIcon/>*/}
+                    <p className="pl-2 text-sm">0</p>
+                </div>
 
-                <p className="text-stone-500 text-sm">
+                <div className="flex hover:text-stone-400 cursor-pointer items-center">
+                    <ChatBubbleIcon/>
                     {/*{comments.length} {comments.length === 1 ? "comment" : "comments"}*/}
-                    0 comments
-                </p>
+                    <p className="pl-2 text-sm">0</p>
+                </div>
 
+                {
+                    isDesktop ?
+                        <Dialog open={open} onOpenChange={setOpen}>
+                            <DialogTrigger asChild>
+                                <div className="flex hover:text-stone-400 cursor-pointer items-center">
+                                    <TrashIcon/>
+                                    <p className="pl-1 text-sm">Delete</p>
+                                </div>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-[610px] h-52">
+                                <DialogHeader className="mt-6">
+                                    <DialogTitle className="text-xl">Delete post</DialogTitle>
+                                    <DialogDescription className="text-md">
+                                        This action will permanently delete this post
+                                    </DialogDescription>
+                                    <div className="flex flex-row gap-3">
+                                        <Button type="submit" className="flex-1 mt-6">Delete</Button>
+                                        <Button variant="outline"
+                                                className="flex-1 mt-6">Cancel</Button>
+                                    </div>
+                                </DialogHeader>
+                            </DialogContent>
+                        </Dialog>
+                        :
+                        <Drawer open={open} onOpenChange={setOpen}>
+                            <DrawerTrigger asChild>
+                                <div className="flex hover:text-stone-400 cursor-pointer items-center">
+                                    <TrashIcon/>
+                                    <p className="pl-1 text-sm">Delete</p>
+                                </div>
+                            </DrawerTrigger>
+                            <DrawerContent className="h-72">
+                                <DrawerHeader className="text-left mt-8">
+                                    <DrawerTitle>Delete post</DrawerTitle>
+                                    <DrawerDescription>
+                                        This action will permanently delete this post
+                                    </DrawerDescription>
+                                </DrawerHeader>
+                                <form className="grid items-start gap-2 px-4">
+                                    <Button type="submit">Delete</Button>
+                                    <DrawerClose asChild>
+                                        <Button variant="outline">Cancel</Button>
+                                    </DrawerClose>
+                                </form>
+                            </DrawerContent>
+                        </Drawer>
+                }
             </div>
         </Card>
     )

@@ -8,9 +8,11 @@ import {useTheme} from "next-themes";
 import {TechnologiesCardInterface} from "@/types/TechnologiesCardInterface";
 import {useEffect} from "react";
 import VanillaTilt from "vanilla-tilt";
+import {useMediaQuery} from "@/hooks/useMediaQuery";
 
 export default function TechnologiesCardsV2() {
     const {theme, setTheme} = useTheme();
+    const isDesktop = useMediaQuery("(min-width: 768px)")
 
     const cardItems: TechnologiesCardInterface[] = [
         {
@@ -256,17 +258,17 @@ export default function TechnologiesCardsV2() {
     ];
 
     useEffect(() => {
-        // @ts-ignore
-        VanillaTilt.init(document.querySelectorAll('#card, #card-button'), {
-            max: 12.5,
-            speed: 300,
-            glare: true,
-            "max-glare": 0.25,
-            "scale": 1.1,
-            reverse: true,
-            perspective: 1000,
-            gyroscope: true
-        });
+            // @ts-ignore
+            VanillaTilt.init(document.querySelectorAll('#card, #card-button'), {
+                max: 12.5,
+                speed: 300,
+                glare: true,
+                "max-glare": 0.25,
+                "scale": 1.1,
+                reverse: true,
+                perspective: 1000,
+                gyroscope: true
+            });
     }, []);
 
     return (
