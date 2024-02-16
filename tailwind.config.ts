@@ -73,6 +73,9 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "bounce-slow": "bounce 2s linear infinite",
+        "ping-slow": "ping 2s linear infinite",
+        "ping-slower": "ping 2.2s linear infinite",
+        "ping-slowest": "ping 2.4s linear infinite"
       },
     },
   },

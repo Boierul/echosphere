@@ -3,14 +3,14 @@
 import React, {useState} from "react";
 import {useRouter} from "next/navigation";
 import {Button} from "@/components/ui/button";
-import Spacer from "@/components/Spacer";
 import {Textarea} from "@/components/ui/textarea";
-import {Label} from "@/components/ui/label";
 import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
-import {toast, useToast} from "@/components/ui/use-toast";
-import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {useToast} from "@/components/ui/use-toast";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {askChatGPTForSuggestion} from "@/requests";
+import Loader from "@/components/Loader";
 // import {Button, Spacer, Spinner, Textarea} from "@nextui-org/react";
 // import {useSession} from "next-auth/react";
 
@@ -37,25 +37,11 @@ export default function AddPost() {
     const [errorMessage, setErrorMessage] = useState("Error creating post.");
 
     const enhanceWithAI = async () => {
-        // if (enhancing) return;
-        // if (content.length < 1) {
-        //     setErrorMessage("Post cannot be empty");
-        //     setError(true);
-        //     return;
-        // }
-        // setEnhancing(true);
-        // setError(false);
-        //
-        // const res = await askChatGPTForSuggestion(content);
-        //
-        // if (res.ok) {
-        //     const GPTdata = await res.json();
-        //     setContent(GPTdata.content);
-        // } else {
-        //     setError(true);
-        // }
-        //
-        // setEnhancing(false);
+        setEnhancing(true);
+        const res = await askChatGPTForSuggestion(content);
+        const GPTdata = await res.json();
+        setEnhancing(false);
+        setContent(GPTdata.content);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -102,24 +88,24 @@ export default function AddPost() {
         message: z
             .string()
             .min(5, {
-                message: "Message must be at least 5 characters.",
+                message: "Message must be at least 5 characters",
             })
             .max(300, {
-                message: "Message must not be longer than 300 characters.",
+                message: "Message must not be longer than 300 characters",
             })
             .refine(value => !containsProfanity(value), {
-                message: "Your message contains profanity.",
+                message: "Your message contains profanities",
             }),
     })
 
     // Form object
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
+        mode: `onChange`
     })
 
     function onSubmit(data: z.infer<typeof FormSchema>) {
-        console.log(JSON.stringify(data))
-
+        // console.log(JSON.stringify(data))
         toast({
             title: "You submitted the following values:",
             description: (
@@ -149,7 +135,7 @@ export default function AddPost() {
                 {/*    onChange={(e) => setContent(e.target.value)}*/}
                 {/*/>*/}
 
-                <div className="grid w-full gap-1.5 mb-4 pt-8">
+                <div className="grid w-full gap-1.5 mb-2 pt-8">
                     <FormField
                         control={form.control}
                         name="message"
@@ -164,16 +150,25 @@ export default function AddPost() {
                                 <FormControl>
                                     <Textarea
                                         placeholder="Give it a try and test it out"
-                                        className="resize-none h-24 rounded-lg"
+                                        className="resize-none h-28 rounded-lg"
+                                        disabled={enhancing}
                                         {...field}
+                                        // onChange={(e) => setContent(e.target.value)}
+                                        // value={content}
                                     />
+                                    {/*<Textarea*/}
+                                    {/*    placeholder="Give it a try and test it out"*/}
+                                    {/*    className="resize-none h-24 rounded-lg"*/}
+                                    {/*    onChange={(e) => setContent(e.target.value)}*/}
+                                    {/*    value={content}*/}
+                                    {/*    {...field}*/}
+                                    {/*/>*/}
                                 </FormControl>
-                                <div id="form-error" style={{
-                                    minHeight: "1.1rem",
-                                    position: "absolute",
-                                    marginTop: "3.75rem"
-                                }}>
-                                    <FormMessage className="text-rose-400 dark:text-rose-600"/>
+                                <div id="form-error" className="mb-2 flex flex-row justify-between">
+                                    <div className="">
+                                        <FormMessage className="text-rose-400 dark:text-rose-600"/>
+                                    </div>
+                                    <p className="text-xs pt-[2px]">{(content && content.length) || "0"}/300</p>
                                 </div>
                             </FormItem>
                         )}
@@ -185,7 +180,8 @@ export default function AddPost() {
                         className="font-medium flex-1"
                         color="secondary"
                         type="submit"
-                        // isDisabled={!session || enhancing}
+                        // disabled={!session || enhancing}
+                        disabled={enhancing}
                         style={{minWidth: "10rem"}}
                     >
                         {/*{loading ? <Spinner size="sm" color="white"/> : "Post"}*/}
@@ -193,14 +189,14 @@ export default function AddPost() {
                     </Button>
 
                     <Button
-                        // isDisabled={!session || enhancing}
+                        // disabled={!session || enhancing}
+                        disabled={enhancing}
                         style={{minWidth: "10rem"}}
-                        // onPress={enhanceWithAI}
+                        onClick={enhanceWithAI}
                         className="font-medium flex-1"
                         variant="secondary"
                     >
-                        {/*{enhancing ? <Spinner size="sm" color="white"/> : "AI suggestion"}*/}
-                        AI Suggestion
+                        {enhancing ? <Loader/> : "AI Suggestion"}
                     </Button>
                 </div>
             </form>

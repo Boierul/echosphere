@@ -12,7 +12,7 @@ import {Toaster} from "@/components/ui/toaster";
 // const inter = Inter({subsets: ["latin"]});
 
 export const metadata: Metadata = {
-    title: "Echosphere",
+    title: "Echosphere.",
     description: "Bootstrapped by Boierul",
     keywords: [
         "Next.js",

@@ -18,6 +18,7 @@ import Link from "next/link";
 import * as React from "react";
 import {
     Dialog,
+    DialogClose,
     DialogContent,
     DialogDescription,
     DialogHeader,
@@ -129,9 +130,14 @@ export default function Post() {
                                         This action will permanently delete this post
                                     </DialogDescription>
                                     <div className="flex flex-row gap-3">
-                                        <Button type="submit" className="flex-1 mt-6">Delete</Button>
-                                        <Button variant="outline"
-                                                className="flex-1 mt-6">Cancel</Button>
+                                        <Button type="submit" className="flex-1 mt-6">
+                                            Delete
+                                        </Button>
+                                        <DialogClose asChild>
+                                            <Button variant="outline" className="flex-1 mt-6">
+                                                Cancel
+                                            </Button>
+                                        </DialogClose>
                                     </div>
                                 </DialogHeader>
                             </DialogContent>
