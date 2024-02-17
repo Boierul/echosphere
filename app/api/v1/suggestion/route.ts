@@ -1,12 +1,11 @@
 import openai from '@/lib/openai';
 import {NextRequest, NextResponse} from "next/server";
 
-/* POST - ask ChatGPT for a post suggestion description */
+/* POST - ask ChatGPT for a posts suggestion description */
 export async function POST(req: NextRequest, res: NextResponse) {
     try {
         // Parse JSON from the request body
         const {content: prompt} = JSON.parse(await req.text());
-        console.log(req.body)
 
         // ChatGPT query
         const chatGPTQuery = `Make this social media post sounds like a comment online that tells people how

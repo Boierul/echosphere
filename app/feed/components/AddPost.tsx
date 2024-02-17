@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import {Button} from "@/components/ui/button";
 import {Textarea} from "@/components/ui/textarea";
@@ -11,6 +11,7 @@ import {useToast} from "@/components/ui/use-toast";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {askChatGPTForSuggestion} from "@/requests";
 import Loader from "@/components/Loader";
+import {createPost} from "@/requests/createPost";
 // import {Button, Spacer, Spinner, Textarea} from "@nextui-org/react";
 // import {useSession} from "next-auth/react";
 
@@ -26,7 +27,7 @@ export default function AddPost() {
     const router = useRouter();
     const {toast} = useToast()
 
-    // Add a post content
+    // Add a posts content
     const [content, setContent] = useState("");
     const [loading, setLoading] = useState(false);
 
@@ -34,14 +35,15 @@ export default function AddPost() {
     const [enhancing, setEnhancing] = useState(false);
 
     const [error, setError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("Error creating post.");
+    const [errorMessage, setErrorMessage] = useState("Error creating posts.");
+
 
     const enhanceWithAI = async () => {
         setEnhancing(true);
         const res = await askChatGPTForSuggestion(content);
         const GPTdata = await res.json();
-        setEnhancing(false);
         setContent(GPTdata.content);
+        setEnhancing(false);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -69,7 +71,7 @@ export default function AddPost() {
         //         setError(false);
         //         setLoading(false);
         //     } catch {
-        //         setErrorMessage("Error creating post.");
+        //         setErrorMessage("Error creating posts.");
         //         setError(true);
         //     }
         // }
@@ -83,7 +85,7 @@ export default function AddPost() {
         return profanities.some((profanity) => str.includes(profanity));
     }
 
-    // Form Schema validation
+    // Zod Form Schema validation
     const FormSchema = z.object({
         message: z
             .string()
@@ -94,47 +96,33 @@ export default function AddPost() {
                 message: "Message must not be longer than 300 characters",
             })
             .refine(value => !containsProfanity(value), {
-                message: "Your message contains profanities",
+                message: "Message contains profanities",
             }),
     })
 
-    // Form object
+    // Zod Form object
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         mode: `onChange`
     })
 
-    function onSubmit(data: z.infer<typeof FormSchema>) {
+    async function onSubmit(data: z.infer<typeof FormSchema>) {
         // console.log(JSON.stringify(data))
+        const res = await createPost(content);
+        if (res.ok) {
+            setContent("");
+            router.refresh();
+        }
+
         toast({
-            title: "You submitted the following values:",
-            description: (
-                <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                    <code className="text-white">
-                        {JSON.stringify(data, null, 2)}
-                    </code>
-                </pre>
-            ),
+            title: "Post successfully submitted",
+            description: "Share it with everyone again",
         })
     }
 
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                {/*<Textarea*/}
-                {/*    className="mt-6 bold"*/}
-                {/*    size="lg"*/}
-                {/*    variant="faded"*/}
-                {/*    labelPlacement="outside"*/}
-                {/*    maxLength={300}*/}
-                {/*    placeholder={session ? "Give it a try and test it out" : ""}*/}
-                {/*    label={session ? "Share your thoughts" : "Please sign in to post."}*/}
-                {/*    errorMessage={error && errorMessage}*/}
-                {/*    isDisabled={!session || enhancing}*/}
-                {/*    value={content}*/}
-                {/*    onChange={(e) => setContent(e.target.value)}*/}
-                {/*/>*/}
-
                 <div className="grid w-full gap-1.5 mb-2 pt-8">
                     <FormField
                         control={form.control}
@@ -152,17 +140,10 @@ export default function AddPost() {
                                         placeholder="Give it a try and test it out"
                                         className="resize-none h-28 rounded-lg"
                                         disabled={enhancing}
+                                        onChangeCapture={(e) => setContent(e.currentTarget.value)}
+                                        defaultValue={content}
                                         {...field}
-                                        // onChange={(e) => setContent(e.target.value)}
-                                        // value={content}
                                     />
-                                    {/*<Textarea*/}
-                                    {/*    placeholder="Give it a try and test it out"*/}
-                                    {/*    className="resize-none h-24 rounded-lg"*/}
-                                    {/*    onChange={(e) => setContent(e.target.value)}*/}
-                                    {/*    value={content}*/}
-                                    {/*    {...field}*/}
-                                    {/*/>*/}
                                 </FormControl>
                                 <div id="form-error" className="mb-2 flex flex-row justify-between">
                                     <div className="">

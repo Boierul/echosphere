@@ -53,7 +53,7 @@ export default function Post({
     const [open, setOpen] = React.useState(false)
     const isDesktop = useMediaQuery("(min-width: 768px)")
 
-    // Make the post clickable for post details
+    // Make the posts clickable for posts details
     const linkifiedContent = linkify(content);
 
 
