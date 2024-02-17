@@ -163,9 +163,11 @@ export default function Post({
                                         This action will permanently delete this post
                                     </DialogDescription>
                                     <div className="flex flex-row gap-3">
-                                        <Button type="submit" className="flex-1 mt-6" onClick={deleteThePost}>
-                                            Delete
-                                        </Button>
+                                        <DialogClose asChild>
+                                            <Button type="submit" className="flex-1 mt-6" onClick={deleteThePost}>
+                                                Delete
+                                            </Button>
+                                        </DialogClose>
                                         <DialogClose asChild>
                                             <Button variant="outline" className="flex-1 mt-6">
                                                 Cancel
@@ -191,7 +193,9 @@ export default function Post({
                                     </DrawerDescription>
                                 </DrawerHeader>
                                 <form className="grid items-start gap-2 px-4">
-                                    <Button onClick={deleteThePost}>Delete</Button>
+                                    <DrawerClose asChild>
+                                        <Button onClick={deleteThePost}>Delete</Button>
+                                    </DrawerClose>
                                     <DrawerClose asChild>
                                         <Button variant="outline">Cancel</Button>
                                     </DrawerClose>
