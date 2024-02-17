@@ -3,7 +3,7 @@
 import {Card} from "@/components/ui/card";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {Button} from "@/components/ui/button";
-import {ChatBubbleIcon, DotsHorizontalIcon, HeartIcon, TrashIcon} from "@radix-ui/react-icons";
+import {ChatBubbleIcon, DotsHorizontalIcon, HeartIcon, PersonIcon, TrashIcon} from "@radix-ui/react-icons";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -34,26 +34,42 @@ import {
     DrawerTitle,
     DrawerTrigger
 } from "@/components/ui/drawer";
-import {useMediaQuery} from "@/hooks/useMediaQuery";
 
-export default function Post() {
+import {useMediaQuery} from "@/hooks/useMediaQuery";
+import {PostInterface} from "@/types";
+import {formatDate} from "@/utils/formatDate";
+import linkify from "@/utils/linkify";
+
+export default function Post({
+                                 id,
+                                 avatar,
+                                 userId,
+                                 name,
+                                 createdAt,
+                                 content,
+                                 likes,
+                                 comments
+                             }: PostInterface) {
     const [open, setOpen] = React.useState(false)
     const isDesktop = useMediaQuery("(min-width: 768px)")
+
+    // Make the post clickable for post details
+    const linkifiedContent = linkify(content);
+
 
     return (
         <Card className="p-2 my-4 rounded-lg">
             <div id="card-header" className="flex flex-row items-center p-4">
                 <Avatar className="w-12 h-12">
-                    <AvatarImage src="https://avatars.githubusercontent.com/u/49337867?v=4" alt="@boierul"/>
-                    <AvatarFallback>DP</AvatarFallback>
+                    <AvatarImage src={avatar} alt={`@${name}`}/>
+                    <AvatarFallback><PersonIcon/></AvatarFallback>
                 </Avatar>
 
                 <div className="flex justify-between w-full">
                     <div className="pl-4">
-                        <div className="font-bold text-sm sm:text-lg">Dan Pintea</div>
+                        <div className="font-bold text-sm sm:text-lg">{name}</div>
                         <div className="text-xs text-stone-500 sm:text-sm">
-                            {/*{formatDate(createdAt)}*/}
-                            February 6, 2024 at 12:08 AM
+                            {formatDate(createdAt)}
                         </div>
                     </div>
 
@@ -67,7 +83,7 @@ export default function Post() {
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="w-20 sm:w-44">
-                            <DropdownMenuLabel>Username</DropdownMenuLabel>
+                            <DropdownMenuLabel>{name}</DropdownMenuLabel>
                             <DropdownMenuSeparator/>
                             <DropdownMenuGroup>
                                 <DropdownMenuItem className="cursor-pointer">
@@ -95,8 +111,7 @@ export default function Post() {
                 {/*<Link href={`/posts/${id}`}>*/}
                 <Link href="/">
                     <p className="pr-4">
-                        {/*{linkifiedContent}*/}
-                        The White Stripes - Fell In Love With a Girl
+                        {linkifiedContent}
                     </p>
                 </Link>
             </div>
@@ -104,14 +119,12 @@ export default function Post() {
             <div className="flex px-4 items-center gap-3 mb-4">
                 <div className="flex hover:text-stone-400 cursor-pointer items-center">
                     <HeartIcon/>
-                    {/*{comments.length} {comments.length === 1 ? "comment" : "comments"}*/}
-                    <p className="pl-2 text-sm">0</p>
+                    <p className="pl-2 text-sm">{likes.length}</p>
                 </div>
 
                 <div className="flex hover:text-stone-400 cursor-pointer items-center">
                     <ChatBubbleIcon/>
-                    {/*{comments.length} {comments.length === 1 ? "comment" : "comments"}*/}
-                    <p className="pl-2 text-sm">0</p>
+                    <p className="pl-2 text-sm">{comments.length}</p>
                 </div>
 
                 {

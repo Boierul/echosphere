@@ -5,10 +5,11 @@ import Link from "next/link";
 import {Button} from "@/components/ui/button";
 
 import {useTheme} from "next-themes";
-import {TechnologiesCardInterface} from "@/types/TechnologiesCardInterface";
 import {useEffect} from "react";
 import VanillaTilt from "vanilla-tilt";
+
 import {useMediaQuery} from "@/hooks/useMediaQuery";
+import {TechnologiesCardInterface} from "@/types";
 
 export default function TechnologiesCardsV2() {
     const {theme, setTheme} = useTheme();

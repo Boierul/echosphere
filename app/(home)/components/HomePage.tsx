@@ -7,7 +7,7 @@ import {Button} from "@/components/ui/button";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 
 import TechnologiesCardsV2 from "@/app/(home)/components/TechnologiesCardsV2";
-import {StarRatingInterface} from "@/types/StarRatingInterface"
+import {StarRatingInterface} from "@/types"
     ;
 import TechnologiesCards from "@/app/(home)/legacy/TechnologiesCards";
 

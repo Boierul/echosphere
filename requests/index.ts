@@ -1,3 +1,4 @@
 import {askChatGPTForSuggestion} from "@/requests/openaiSuggestion";
+import {getAllPosts} from "@/requests/getAllPosts";
 
-export {askChatGPTForSuggestion}
+export {askChatGPTForSuggestion, getAllPosts}

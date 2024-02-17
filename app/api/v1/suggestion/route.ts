@@ -1,6 +1,7 @@
 import openai from '@/lib/openai';
 import {NextRequest, NextResponse} from "next/server";
 
+/* POST - ask ChatGPT for a post suggestion description */
 export async function POST(req: NextRequest, res: NextResponse) {
     try {
         // Parse JSON from the request body
@@ -23,9 +24,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
         return NextResponse.json(chatCompletion.choices[0].message);
     } catch (error) {
+        // TODO: Refactor status codes for more appropriate ones
         NextResponse.json(
             {message: `Error has occurred while enhancing your prompt: ${error}`},
-            {status: 403}
+            {status: 500}
         )
     }
 }
