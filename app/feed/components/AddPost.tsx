@@ -116,7 +116,8 @@ export default function AddPost() {
 
         toast({
             title: "Post successfully submitted",
-            description: "Share it with everyone again",
+            description: "You shared a great idea.",
+            duration: 2000
         })
     }
 

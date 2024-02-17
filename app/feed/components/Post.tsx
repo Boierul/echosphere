@@ -34,9 +34,12 @@ import {
     DrawerTitle,
     DrawerTrigger
 } from "@/components/ui/drawer";
+import {toast} from "@/components/ui/use-toast";
+import {useRouter} from "next/navigation";
 
-import {useMediaQuery} from "@/hooks/useMediaQuery";
 import {PostInterface} from "@/types";
+import {deletePost} from "@/requests";
+import {useMediaQuery} from "@/hooks/useMediaQuery";
 import {formatDate} from "@/utils/formatDate";
 import linkify from "@/utils/linkify";
 
@@ -53,9 +56,24 @@ export default function Post({
     const [open, setOpen] = React.useState(false)
     const isDesktop = useMediaQuery("(min-width: 768px)")
 
+    const router = useRouter();
+
     // Make the posts clickable for posts details
     const linkifiedContent = linkify(content);
 
+    async function deleteThePost() {
+        const res = await deletePost(id);
+
+        if (res.ok) {
+            router.refresh();
+        }
+
+        toast({
+            title: "Post successfully deleted",
+            description: "Great ideas take time. Try to share a better one.",
+            duration: 2000
+        })
+    }
 
     return (
         <Card className="p-2 my-4 rounded-lg">
@@ -145,7 +163,7 @@ export default function Post({
                                         This action will permanently delete this post
                                     </DialogDescription>
                                     <div className="flex flex-row gap-3">
-                                        <Button type="submit" className="flex-1 mt-6">
+                                        <Button type="submit" className="flex-1 mt-6" onClick={deleteThePost}>
                                             Delete
                                         </Button>
                                         <DialogClose asChild>
@@ -173,7 +191,7 @@ export default function Post({
                                     </DrawerDescription>
                                 </DrawerHeader>
                                 <form className="grid items-start gap-2 px-4">
-                                    <Button type="submit">Delete</Button>
+                                    <Button onClick={deleteThePost}>Delete</Button>
                                     <DrawerClose asChild>
                                         <Button variant="outline">Cancel</Button>
                                     </DrawerClose>

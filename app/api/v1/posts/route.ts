@@ -1,6 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
-import {getUser} from "@/requests";
-import {postSinglePostToDB} from "@/prisma/CRUD";
+import {getUser, postSinglePostToDB} from "@/prisma/CRUD";
 
 /* POST - add a posts to the DB */
 export async function POST(req: NextRequest, res: NextResponse) {
@@ -24,8 +23,3 @@ export async function POST(req: NextRequest, res: NextResponse) {
         )
     }
 }
-
-// /* GET - get all posts from the DB */
-// export async function GET() {
-//
-// }

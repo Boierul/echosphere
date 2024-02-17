@@ -51,8 +51,9 @@ export async function postSinglePostToDB(content: string, userId: string) {
 export async function findPostToDeleteFromDB(postId:string) {
     const [postToDelete] = await Promise.all([prisma.post.findUnique({
         where: {id: postId as string},
-        select: {userId: true},
+        select: {id:true, userId: true},
     })]);
+
     return postToDelete;
 }
 
@@ -63,3 +64,4 @@ export async function deleteSinglePostFromDB(postId: string) {
         },
     });
 }
+
