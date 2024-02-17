@@ -1,8 +1,7 @@
 import React from "react";
-import {Button} from "@/components/ui/button";
 import {Card} from "@/components/ui/card";
-import {DotsHorizontalIcon} from "@radix-ui/react-icons";
 
+// TODO: Adjust it to the main Feed
 const FeedPostsSkeleton = () => {
     const renderCards = () => {
         const posts = [];
@@ -23,20 +22,17 @@ const FeedPostsSkeleton = () => {
                                 </div>
                             </div>
 
-                            <Button variant="ghost" disabled={true} style={{
-                                marginTop: "-4px",
-                                marginRight: "-12px"
-                            }}>
-                                <DotsHorizontalIcon/>
-                            </Button>
+                            {/*<Button variant="ghost" disabled={true} style={{*/}
+                            {/*    marginTop: "-4px",*/}
+                            {/*    right: "12px",*/}
+                            {/*}}>*/}
+                            {/*    <DotsHorizontalIcon/>*/}
+                            {/*</Button>*/}
                         </div>
                     </div>
 
-                    <div className="p-4">
+                    <div className="px-4">
                         <p className="pr-4 mb-1 rounded-md text-transparent bg-zinc-100 dark:bg-zinc-800">
-                            Post
-                        </p>
-                        <p className="pr-4 rounded-md text-transparent bg-zinc-100 dark:bg-zinc-800">
                             Post
                         </p>
                     </div>

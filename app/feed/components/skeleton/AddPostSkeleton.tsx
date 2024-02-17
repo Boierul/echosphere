@@ -13,7 +13,7 @@ export default function AddPostSkeleton() {
                     </Label>
                     <Textarea
                         placeholder=""
-                        className="resize-none h-24 rounded-lg"
+                        className="resize-none h-28 rounded-lg mb-4"
                     />
                 </div>
             </div>

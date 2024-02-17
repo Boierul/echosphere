@@ -4,7 +4,7 @@ export interface PostInterface {
     id: string;
     userId: string;
     name: string | null;
-    avatar: string | null;
+    avatar?: string;
     createdAt: string;
     content: string;
     likes: Like[];

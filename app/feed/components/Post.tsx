@@ -132,7 +132,9 @@ export default function Post({
                         <Dialog open={open} onOpenChange={setOpen}>
                             <DialogTrigger asChild>
                                 <div className="flex hover:text-stone-400 cursor-pointer items-center">
-                                    <TrashIcon/>
+                                    <div className="-ml-1">
+                                        <TrashIcon/>
+                                    </div>
                                     <p className="pl-1 text-sm">Delete</p>
                                 </div>
                             </DialogTrigger>
