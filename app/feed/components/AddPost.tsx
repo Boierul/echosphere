@@ -10,6 +10,7 @@ import {Button} from "@/components/ui/button";
 import {Textarea} from "@/components/ui/textarea";
 import {useToast} from "@/components/ui/use-toast";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {useSession} from "next-auth/react";
 
 import {createPost} from "@/requests/createPost";
 import {askChatGPTForSuggestion} from "@/requests";
@@ -20,7 +21,23 @@ import LoaderInverted from "@/components/LoaderInverted";
 const filter = new Filter();
 
 export default function AddPost() {
-    // const {data: session} = useSession();
+    /* ------------------------------------------------------------------------------------------------------------ */
+    // Next-Auth data
+
+    const {data: session} = useSession();
+    const [isNotLogged, setIsNotLogged] = useState(true);
+
+    // TextArea disabled only takes booleans
+    useEffect(() => {
+        if (session) {
+            setIsNotLogged(false)
+        } else {
+            setIsNotLogged(true)
+        }
+    }, [session,isNotLogged]);
+
+    /* ------------------------------------------------------------------------------------------------------------ */
+
     const router = useRouter();
     const {toast} = useToast()
 
@@ -113,13 +130,13 @@ export default function AddPost() {
                                     position: "absolute",
                                     marginTop: "-1rem"
                                 }}>
-                                    Share your thoughts
+                                    {session ? "Share your thoughts" : "Please sign in to post."}
                                 </FormLabel>
                                 <FormControl>
                                     <Textarea
-                                        placeholder="Give it a try and test it out"
+                                        placeholder={session ? "Give it a try and test it out" : ""}
                                         className="resize-none h-28 rounded-lg"
-                                        disabled={enhancing || loading}
+                                        disabled={enhancing || loading || isNotLogged}
                                         onChangeCapture={(e) => {
                                             setContent(e.currentTarget.value)
                                         }}
@@ -142,16 +159,14 @@ export default function AddPost() {
                         className="font-medium flex-1"
                         color="secondary"
                         type="submit"
-                        // disabled={!session || enhancing}
-                        disabled={enhancing || loading}
+                        disabled={enhancing || loading || !session}
                         style={{minWidth: "10rem"}}
                     >
                         {loading ? <LoaderInverted/> : "Post"}
                     </Button>
 
                     <Button
-                        // disabled={!session || enhancing}
-                        disabled={enhancing || loading}
+                        disabled={enhancing || loading || !session}
                         style={{minWidth: "10rem"}}
                         onClick={enhanceWithAI}
                         className="font-medium flex-1"

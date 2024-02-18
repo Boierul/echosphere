@@ -11,7 +11,7 @@ export default function Feed({posts}: FeedInterface) {
                     id={post.id}
                     userId={post.user?.id}
                     name={post.user?.name}
-                    avatar={post.user?.image ?? undefined}
+                    avatar={post.user?.image || undefined}
                     createdAt={post.createdAt}
                     content={post.content}
                     likes={post.likes}

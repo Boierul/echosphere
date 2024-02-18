@@ -1,13 +1,26 @@
 import {NextRequest, NextResponse} from "next/server";
 import {getUser, postSinglePostToDB} from "@/prisma/CRUD";
 
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/app/api/auth/[...nextauth]/route";
+
 /* POST - add a posts to the DB */
 export async function POST(req: NextRequest, res: NextResponse) {
+    const session = await getServerSession(authOptions);
+
+    // Require AUTH in order to post
+    if (!session) {
+        return NextResponse.json(
+            {message: `Please sign in to create a post.`},
+            {status: 401}
+        )
+    }
+
+    // Get the request body
     const {content} = JSON.parse(await req.text());
 
-    // TODO: Change it to the session user with auth
     // Get user from the DB
-    const prismaUser = await getUser("email@email.com");
+    const prismaUser = await getUser(session?.user?.email || undefined);
 
     // Create posts
     try {
@@ -16,9 +29,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
         return NextResponse.json(post)
     } catch (error) {
-        // TODO: Refactor status codes for more appropriate ones
-        NextResponse.json(
-            {message: `Internal server error: ${error}`},
+        return NextResponse.json(
+            {
+                message: "Internal server error",
+                error: `${error}`
+            },
             {status: 500}
         )
     }

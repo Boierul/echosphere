@@ -27,7 +27,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
         return NextResponse.json(post)
     } catch (error) {
-        // TODO: Refactor status codes for more appropriate ones
         return NextResponse.json(
             {
                 message: "Internal server error",
@@ -59,9 +58,11 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
 
         return NextResponse.json(post)
     } catch (error) {
-        // TODO: Refactor status codes for more appropriate ones
-        NextResponse.json(
-            {message: `Internal server error: ${error}`},
+        return NextResponse.json(
+            {
+                message: "Internal server error",
+                error: `${error}`
+            },
             {status: 500}
         )
     }

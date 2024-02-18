@@ -36,6 +36,7 @@ import {
 } from "@/components/ui/drawer";
 import {toast} from "@/components/ui/use-toast";
 import {useRouter} from "next/navigation";
+import {useSession} from "next-auth/react";
 
 import {PostInterface} from "@/types";
 import {deletePost} from "@/requests";
@@ -58,6 +59,10 @@ export default function Post({
 
     const router = useRouter();
 
+    // Next-auth data
+    const {data: session} = useSession();
+    const {user} = session || {};
+
     // Make the posts clickable for posts details
     const linkifiedContent = linkify(content);
 
@@ -78,9 +83,11 @@ export default function Post({
     return (
         <Card className="p-2 my-4 rounded-lg">
             <div id="card-header" className="flex flex-row items-center p-4">
-                <Avatar className="w-12 h-12">
+                <Avatar className={`w-12 h-12 ${userId === user?.id ? 'border-2 border-rose-500' : ''}`}>
                     <AvatarImage src={avatar} alt={`@${name}`}/>
-                    <AvatarFallback><PersonIcon/></AvatarFallback>
+                    <AvatarFallback>
+                        <PersonIcon/>
+                    </AvatarFallback>
                 </Avatar>
 
                 <div className="flex justify-between w-full">
@@ -93,12 +100,13 @@ export default function Post({
 
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" style={{
-                                marginTop: "-4px",
-                                marginRight: "-12px"
-                            }}>
-                                <DotsHorizontalIcon/>
-                            </Button>
+                            {userId === user?.id ?
+                                <Button variant="ghost" style={{
+                                    marginTop: "-4px",
+                                    marginRight: "-12px"
+                                }}>
+                                    <DotsHorizontalIcon/>
+                                </Button> : <></>}
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="w-20 sm:w-44">
                             <DropdownMenuLabel>{name}</DropdownMenuLabel>

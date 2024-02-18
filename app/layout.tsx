@@ -5,9 +5,9 @@ import {GeistSans} from 'geist/font/sans';
 import type {Metadata} from "next";
 import {Inter} from "next/font/google";
 
-import {ThemeProvider} from "@/providers/ThemeProvider";
 import NavigationBar from "@/components/NavigationBar";
 import {Toaster} from "@/components/ui/toaster";
+import ProvidersWrapper from "@/providers/ProvidersWrapper";
 
 // const inter = Inter({subsets: ["latin"]});
 
@@ -34,15 +34,10 @@ export default function RootLayout({children,}: Readonly<{ children: React.React
     return (
         <html lang="en">
         <body className={GeistSans.className}>
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            // disableTransitionOnChange
-        >
+        <ProvidersWrapper>
             <NavigationBar/>
             {children}
-        </ThemeProvider>
+        </ProvidersWrapper>
         <Toaster />
         </body>
         </html>

@@ -1,20 +1,25 @@
 "use client"
 
 import Link from "next/link";
+import {signIn, signOut, useSession} from "next-auth/react";
 import {usePathname} from "next/navigation";
 import {useTheme} from "next-themes";
 import {Button} from "@/components/ui/button";
 
 import ThemeToggle from "@/components/ThemeToggle";
 import MobileNavigation from "@/components/MobileNavigation";
+import Loader from "@/components/Loader";
 
 export default function NavigationBar() {
     const pathname = usePathname()
     // Next.js theme provider
     const {theme, setTheme} = useTheme();
+    const {data: session, status} = useSession();
+    const {user} = session || {};
 
     return (
-        <header className="bg-background fixed top-0 z-40 w-full transition-all border-b border-zinc-100 dark:border-zinc-900">
+        <header
+            className="bg-background fixed top-0 z-40 w-full transition-all border-b border-zinc-100 dark:border-zinc-900">
             <div className="container flex h-14 items-center space-x-0 sm:justify-between">
                 <div className="block md:hidden">
                     <MobileNavigation/>
@@ -87,9 +92,19 @@ export default function NavigationBar() {
                 <div className="flex flex-1 items-center justify-end space-x-4">
                     <nav className="flex items-center space-x-1">
                         <ThemeToggle/>
-                        <Button variant="ghost">
-                            Login
-                        </Button>
+                        {session && user ?
+                            <Button variant="ghost" onClick={() => signOut()}>
+                                Sign out
+                            </Button>
+                            :
+                            <Button variant="ghost" onClick={() => signIn()}>
+                                {status && status === "loading" ? (
+                                    <Loader/>
+                                ) : (
+                                    "Login"
+                                )}
+                            </Button>
+                        }
                     </nav>
                 </div>
             </div>

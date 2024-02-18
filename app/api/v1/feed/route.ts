@@ -9,9 +9,11 @@ export async function GET() {
 
         return NextResponse.json(data)
     } catch (error) {
-        // TODO: Refactor status codes for more appropriate ones
-        NextResponse.json(
-            {message: `Internal server error: ${error}`},
+        return NextResponse.json(
+            {
+                message: "Internal server error",
+                error: `${error}`
+            },
             {status: 500}
         )
     }
