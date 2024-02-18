@@ -10,10 +10,11 @@ import {Button} from "@/components/ui/button";
 import {Textarea} from "@/components/ui/textarea";
 import {useToast} from "@/components/ui/use-toast";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import Loader from "@/components/Loader";
 
 import {createPost} from "@/requests/createPost";
 import {askChatGPTForSuggestion} from "@/requests";
+import Loader from "@/components/Loader";
+import LoaderInverted from "@/components/LoaderInverted";
 
 // Filter profanities
 const filter = new Filter();
@@ -24,6 +25,7 @@ export default function AddPost() {
     const {toast} = useToast()
 
     const [content, setContent] = useState("");
+    const [loading, setLoading] = useState(false);
     // AI phrase generation temp storage
     const [enhancing, setEnhancing] = useState(false);
 
@@ -80,12 +82,14 @@ export default function AddPost() {
     } = form;
 
     async function onSubmit(data: z.infer<typeof FormSchema>) {
+        setLoading(true)
         const res = await createPost(data.message);
         if (res.ok) {
             reset({
                 message: "",
             })
             setContent("");
+            setLoading(false)
             router.refresh();
         }
 
@@ -115,7 +119,7 @@ export default function AddPost() {
                                     <Textarea
                                         placeholder="Give it a try and test it out"
                                         className="resize-none h-28 rounded-lg"
-                                        disabled={enhancing}
+                                        disabled={enhancing || loading}
                                         onChangeCapture={(e) => {
                                             setContent(e.currentTarget.value)
                                         }}
@@ -139,16 +143,15 @@ export default function AddPost() {
                         color="secondary"
                         type="submit"
                         // disabled={!session || enhancing}
-                        disabled={enhancing}
+                        disabled={enhancing || loading}
                         style={{minWidth: "10rem"}}
                     >
-                        {/*{loading ? <Spinner size="sm" color="white"/> : "Post"}*/}
-                        Post
+                        {loading ? <LoaderInverted/> : "Post"}
                     </Button>
 
                     <Button
                         // disabled={!session || enhancing}
-                        disabled={enhancing}
+                        disabled={enhancing || loading}
                         style={{minWidth: "10rem"}}
                         onClick={enhanceWithAI}
                         className="font-medium flex-1"

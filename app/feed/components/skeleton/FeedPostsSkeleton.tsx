@@ -9,7 +9,7 @@ const FeedPostsSkeleton = () => {
             posts.push(
                 <Card key={i} className="p-2 my-4 rounded-lg animate-pulse">
                     <div className="flex flex-row items-center p-4">
-                        <div className="w-12 h-12 bg-zinc-100 rounded-full">
+                        <div className="w-12 h-12 bg-zinc-100 rounded-full dark:bg-zinc-800">
                         </div>
 
                         <div className="flex justify-between w-10/12">
