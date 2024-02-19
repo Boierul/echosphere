@@ -1,6 +1,7 @@
 import {NextRequest, NextResponse} from "next/server";
 import {deleteSinglePostFromDB, findPostToDeleteFromDB, getSinglePostFromDB} from "@/prisma/CRUD";
-import {usePathname} from "next/navigation";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 
 /* GET - get a single post from the DB */
 export async function GET(req: NextRequest, res: NextResponse) {
@@ -39,7 +40,16 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
 /* DELETE - delete a single post from the DB */
 export async function DELETE(req: NextRequest, res: NextResponse) {
-    // TODO: Change it to the session user with auth
+    const session = await getServerSession(authOptions);
+
+    // Require AUTH in order to delete post
+    if (!session) {
+        return NextResponse.json(
+            {message: `Please sign in to delete a post.`},
+            {status: 401}
+        )
+    }
+
     try {
         const postId = req.nextUrl.pathname.split('/').pop();
 
@@ -49,6 +59,13 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
             return NextResponse.json(
                 {message: "Post not found"},
                 {status: 404}
+            )
+        }
+
+        if (session.user.id !== post.userId) {
+            return NextResponse.json(
+                {message: "Can't delete other users posts"},
+                {status: 403}
             )
         }
 

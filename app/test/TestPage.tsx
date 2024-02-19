@@ -4,6 +4,9 @@ import * as React from "react";
 import {useState} from "react";
 import Post from "@/app/feed/components/Post";
 import PaginationSectionPost from "@/components/PaginationSectionPost";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import {PersonIcon} from "@radix-ui/react-icons";
+import LoaderSmall from "@/components/LoaderSmall";
 
 export default function TestPage({posts}: any) {
     // Page state variables, in the future model the API to have a cursor and limit
@@ -23,24 +26,26 @@ export default function TestPage({posts}: any) {
 
     return (
         <>
-            {currentPosts?.map((post: any) => (
-                <Post key={post.id}
-                      id={post.id}
-                      userId={post.user.id}
-                      name={post.user.name}
-                      avatar={post.user.image}
-                      createdAt={post.createdAt}
-                      content={post.content}
-                      likes={post.likes}
-                      comments={post.comments}
-                />
-            ))}
+            Test
 
-            <PaginationSectionPost
-                postsPerPage={postsPerPage}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                totalPosts={posts.length}/>
+            {/*{currentPosts?.map((post: any) => (*/}
+            {/*    <Post key={post.id}*/}
+            {/*          id={post.id}*/}
+            {/*          userId={post.user.id}*/}
+            {/*          name={post.user.name}*/}
+            {/*          avatar={post.user.image}*/}
+            {/*          createdAt={post.createdAt}*/}
+            {/*          content={post.content}*/}
+            {/*          likes={post.likes}*/}
+            {/*          comments={post.comments}*/}
+            {/*    />*/}
+            {/*))}*/}
+
+            {/*<PaginationSectionPost*/}
+            {/*    postsPerPage={postsPerPage}*/}
+            {/*    currentPage={currentPage}*/}
+            {/*    setCurrentPage={setCurrentPage}*/}
+            {/*    totalPosts={posts.length}/>*/}
         </>
     )
 }

@@ -8,7 +8,7 @@ import {Button} from "@/components/ui/button";
 
 import ThemeToggle from "@/components/ThemeToggle";
 import MobileNavigation from "@/components/MobileNavigation";
-import Loader from "@/components/Loader";
+import LoaderSmall from "@/components/LoaderSmall";
 
 export default function NavigationBar() {
     const pathname = usePathname()
@@ -99,7 +99,7 @@ export default function NavigationBar() {
                             :
                             <Button variant="ghost" onClick={() => signIn()}>
                                 {status && status === "loading" ? (
-                                    <Loader/>
+                                    <LoaderSmall/>
                                 ) : (
                                     "Login"
                                 )}

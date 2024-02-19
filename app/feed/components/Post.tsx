@@ -83,12 +83,17 @@ export default function Post({
     return (
         <Card className="p-2 my-4 rounded-lg">
             <div id="card-header" className="flex flex-row items-center p-4">
-                <Avatar className={`w-12 h-12 ${userId === user?.id ? 'border-2 border-rose-500' : ''}`}>
-                    <AvatarImage src={avatar} alt={`@${name}`}/>
-                    <AvatarFallback>
-                        <PersonIcon/>
-                    </AvatarFallback>
-                </Avatar>
+                <div className={`${userId === user?.id ? 'flex items-center justify-center min-w-[56px] min-h-[56px] rounded-full bg-neutral-800 dark:bg-neutral-100' : ''}`}>
+                    <div className="flex items-center justify-center min-w-[52px] min-h-[52px] rounded-full bg-white dark:bg-black">
+                        <Avatar
+                            className="w-12 h-12">
+                            <AvatarImage src={avatar} alt="avatar"/>
+                            <AvatarFallback>
+                                <PersonIcon/>
+                            </AvatarFallback>
+                        </Avatar>
+                    </div>
+                </div>
 
                 <div className="flex justify-between w-full">
                     <div className="pl-4">
@@ -154,8 +159,8 @@ export default function Post({
                 </div>
 
                 {
-                    isDesktop ?
-                        <Dialog open={open} onOpenChange={setOpen}>
+                    isDesktop && userId === user?.id ?
+                        (<Dialog open={open} onOpenChange={setOpen}>
                             <DialogTrigger asChild>
                                 <div className="flex hover:text-stone-400 cursor-pointer items-center">
                                     <div className="-ml-1">
@@ -184,9 +189,9 @@ export default function Post({
                                     </div>
                                 </DialogHeader>
                             </DialogContent>
-                        </Dialog>
+                        </Dialog>)
                         :
-                        <Drawer open={open} onOpenChange={setOpen}>
+                        (userId === user?.id ? <Drawer open={open} onOpenChange={setOpen}>
                             <DrawerTrigger asChild>
                                 <div className="flex hover:text-stone-400 cursor-pointer items-center">
                                     <TrashIcon/>
@@ -209,7 +214,7 @@ export default function Post({
                                     </DrawerClose>
                                 </form>
                             </DrawerContent>
-                        </Drawer>
+                        </Drawer> : '')
                 }
             </div>
         </Card>
