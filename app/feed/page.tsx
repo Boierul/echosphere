@@ -12,7 +12,7 @@ export default async function FeedPage() {
             <Spacer/>
 
             <div className="container max-w-2xl mt-10 items-center">
-                <h1 className="font-bold text-6xl mb-4">
+                <h1 className="font-bold text-6xl mb-0 md:mb-2 sm:mb-4">
                     Feed
                 </h1>
 

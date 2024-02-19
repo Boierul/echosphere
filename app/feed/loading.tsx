@@ -9,7 +9,7 @@ export default function Loading() {
             <Spacer/>
 
             <div className="container max-w-2xl mt-10 items-center ">
-                <h1 className="font-bold text-6xl mb-4 animate-pulse">
+                <h1 className="font-bold text-6xl mb-0 md:mb-2 sm:mb-4 animate-pulse">
                     Feed
                 </h1>
 
