@@ -1,31 +1,17 @@
-"use client"
-
 import * as React from "react"
-import {useState} from "react"
-import {Button} from "@/components/ui/button";
-
 import Spacer from "@/components/Spacer";
-import {askChatGPTForSuggestion} from "@/requests/openaiSuggestion";
-import {Textarea} from "@/components/ui/textarea";
-import FeedPostsSkeleton from "@/app/feed/components/skeleton/FeedPostsSkeleton";
-import AddPost from "@/app/feed/components/AddPost";
-import Feed from "@/app/feed/components/Feed";
-import AddPostSkeleton from "@/app/feed/components/skeleton/AddPostSkeleton";
+import {getAllPosts} from "@/requests";
+import TestPage from "@/app/test/TestPage";
 
-export default function Test() {
-    const [content, setContent] = useState("");
+export default async function Test() {
+    const [postsData] = await Promise.all([getAllPosts()])
 
-    const enhanceWithAI = async () => {
-        const res = await askChatGPTForSuggestion(content);
-        const GPTdata = await res.json();
-        setContent(GPTdata.content);
-    };
     return (
         <main>
             <Spacer/>
 
             <div className="container max-w-2xl mt-10 items-center">
-
+                <TestPage posts={postsData}/>
             </div>
 
             {/*<div>*/}

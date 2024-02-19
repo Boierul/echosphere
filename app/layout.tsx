@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children,}: Readonly<{ children: React.ReactNode; }>) {
     return (
-        <html lang="en">
+        <html lang="en" className="no-scrollbar overflow-y-scroll">
         <body className={GeistSans.className}>
         <ProvidersWrapper>
             <NavigationBar/>
