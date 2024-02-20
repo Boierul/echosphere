@@ -25,7 +25,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     // Create posts
     try {
         const post = await postSinglePostToDB(content as string, prismaUser?.id as string)
-        console.log('\x1b[34m  [POST METHOD] - \x1b[33mPOSTS ROUTE - api/v1/posts');
+        console.log(`\x1b[34m  [POST METHOD] - \x1b[33m api/v1/posts - \x1b[0m Post a single post - \x1b[36m${post.id}`);
 
         return NextResponse.json(post)
     } catch (error) {

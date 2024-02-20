@@ -3,7 +3,14 @@
 import {Card} from "@/components/ui/card";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {Button} from "@/components/ui/button";
-import {ChatBubbleIcon, DotsHorizontalIcon, HeartIcon, PersonIcon, TrashIcon} from "@radix-ui/react-icons";
+import {
+    ChatBubbleIcon,
+    DotsHorizontalIcon,
+    HeartFilledIcon,
+    HeartIcon,
+    PersonIcon,
+    TrashIcon
+} from "@radix-ui/react-icons";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -39,7 +46,7 @@ import {useRouter} from "next/navigation";
 import {useSession} from "next-auth/react";
 
 import {PostInterface} from "@/types";
-import {deletePost} from "@/requests";
+import {toggleLikePost, deletePost} from "@/requests";
 import {useMediaQuery} from "@/hooks/useMediaQuery";
 import {formatDate} from "@/utils/formatDate";
 import linkify from "@/utils/linkify";
@@ -54,17 +61,46 @@ export default function Post({
                                  likes,
                                  comments
                              }: PostInterface) {
-    const [open, setOpen] = React.useState(false)
-    const isDesktop = useMediaQuery("(min-width: 768px)")
-
-    const router = useRouter();
-
     // Next-auth data
     const {data: session} = useSession();
     const {user} = session || {};
+    const router = useRouter();
+    // Check the window size for additional styling
+    const isDesktop = useMediaQuery("(min-width: 768px)")
+    // Dialog for Desktop popup
+    const [open, setOpen] = React.useState(false)
+    // Check if the user has already liked the post
+    const currentUserLiked =
+        (session && likes.some((like) => like.userId === user?.id)) || false;
 
     // Make the posts clickable for posts details
     const linkifiedContent = linkify(content);
+
+    const likeUnlikePost = async (id: string) => {
+        const res = await toggleLikePost(id);
+        // Parse the JSON response to get the custom message
+        const data = await res.json();
+
+        if (data.message === "Post Liked") {
+            toast({
+                title: "Post successfully liked",
+                description: "Together we can achieve great things.",
+                duration: 2000
+            })
+        }
+
+        if (data.message === "Post Unliked") {
+            toast({
+                title: "Post successfully unliked",
+                description: "Maybe that post wasn't that good anyway.",
+                duration: 2000
+            })
+        }
+
+        if (res.ok) {
+            router.refresh();
+        }
+    };
 
     async function deleteThePost() {
         const res = await deletePost(id);
@@ -83,8 +119,10 @@ export default function Post({
     return (
         <Card className="p-2 my-4 rounded-lg">
             <div id="card-header" className="flex flex-row items-center p-4">
-                <div className={`${userId === user?.id ? 'flex items-center justify-center min-w-[56px] min-h-[56px] rounded-full bg-neutral-800 dark:bg-neutral-100' : ''}`}>
-                    <div className="flex items-center justify-center min-w-[52px] min-h-[52px] rounded-full bg-white dark:bg-black">
+                <div
+                    className={`${userId === user?.id ? 'flex items-center justify-center min-w-[56px] min-h-[56px] rounded-full bg-neutral-800 dark:bg-neutral-100' : ''}`}>
+                    <div
+                        className="flex items-center justify-center min-w-[52px] min-h-[52px] rounded-full bg-white dark:bg-black">
                         <Avatar
                             className="w-12 h-12">
                             <AvatarImage src={avatar} alt="avatar"/>
@@ -148,8 +186,12 @@ export default function Post({
             </div>
 
             <div className="flex px-4 items-center gap-3 mb-4">
-                <div className="flex hover:text-stone-400 cursor-pointer items-center">
-                    <HeartIcon/>
+                <div
+                    className={`flex items-center ${session ? 'hover:text-stone-700 cursor-pointer dark:hover:text-stone-300' : 'text-stone-400 pointer-events-none cursor-default'}`}>
+                    {currentUserLiked ?
+                        <HeartFilledIcon onClick={() => session && likeUnlikePost(id)}/>
+                        :
+                        <HeartIcon onClick={() => session && likeUnlikePost(id)}/>}
                     <p className="pl-2 text-sm">{likes.length}</p>
                 </div>
 

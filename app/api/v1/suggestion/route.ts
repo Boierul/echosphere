@@ -19,7 +19,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
             model: 'gpt-3.5-turbo',
         });
 
-        console.log('\x1b[34m  [POST METHOD] - \x1b[33mOPENAI - api/v1/suggestion');
+        console.log('\x1b[34m  [POST METHOD] - \x1b[33m api/v1/suggestion - \x1b[0m ChatGPT suggestion');
 
         return NextResponse.json(chatCompletion.choices[0].message);
     } catch (error) {

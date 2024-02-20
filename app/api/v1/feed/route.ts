@@ -5,7 +5,7 @@ import {getAllPostsFromDB} from "@/prisma/CRUD";
 export async function GET() {
     try {
         const data = await getAllPostsFromDB();
-        console.log("\x1b[34m  [GET METHOD] - \x1b[33mFEED ROUTE - api/v1/feed");
+        console.log("\x1b[32m  [GET METHOD] - \x1b[33m api/v1/feed - \x1b[0m Fetch all posts");
 
         return NextResponse.json(data)
     } catch (error) {

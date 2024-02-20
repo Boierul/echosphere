@@ -24,7 +24,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
             )
         }
 
-        console.log("\x1b[34m  [GET METHOD] - \x1b[33mPOSTS ROUTE - api/v1/post/:id");
+        console.log(`\x1b[32m  [GET METHOD] - \x1b[33m api/v1/post/:id - \x1b[0m Fetch a post - \x1b[36m${postId}`);
 
         return NextResponse.json(post)
     } catch (error) {
@@ -69,7 +69,7 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
             )
         }
 
-        console.log('\x1b[34m  [DELETE METHOD] - \x1b[33mPOST ROUTE - api/v1/post/:id');
+        console.log(`\x1b[31m  [DELETE METHOD] - \x1b[33m api/v1/post/:id - \x1b[0m Delete a post - \x1b[36m${postId}`);
 
         await deleteSinglePostFromDB(post.id);
 
