@@ -11,7 +11,9 @@ export default async function Test() {
             <Spacer/>
 
             <div className="container max-w-2xl mt-10 items-center">
+                {/*<div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">*/}
                 <TestPage posts={postsData}/>
+                {/*</div>*/}
             </div>
 
             {/*<div>*/}
