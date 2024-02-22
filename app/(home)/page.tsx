@@ -15,7 +15,6 @@ export default async function Home() {
 
     return (
         <main>
-            <Spacer/>
             <HomePage numStars={githubStars}/>
         </main>
     )
