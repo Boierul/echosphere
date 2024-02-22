@@ -1,5 +1,4 @@
 import HomePage from "@/app/(home)/components/HomePage";
-import Spacer from "@/components/Spacer";
 
 async function getStars() {
     const res: Response = await fetch(
@@ -11,11 +10,10 @@ async function getStars() {
 }
 
 export default async function Home() {
-    const githubStars = await getStars();
-
+    // const githubStars = await getStars();
     return (
         <main>
-            <HomePage numStars={githubStars}/>
+            <HomePage/>
         </main>
     )
 }

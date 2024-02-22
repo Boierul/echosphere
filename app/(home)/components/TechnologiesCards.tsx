@@ -251,7 +251,7 @@ export default function TechnologiesCards() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 justify-center mt-4">
             {cardItems.map((item, i) => (
                 <div key={i} className="w-full">
-                    <Card className="h-full px-2 py-4">
+                    <Card className="h-full px-2 py-4 rounded-md">
                         <CardHeader>
                             <div className="flex items-center">
                                 {item.svg}
