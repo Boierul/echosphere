@@ -7,7 +7,7 @@ import {Button} from "@/components/ui/button";
 import {GitHubLogoIcon} from "@radix-ui/react-icons";
 import {useTheme} from "next-themes";
 import {useRouter} from "next/navigation";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 
 export default function LoginPage({providers}: AuthProvidersInterface) {
     const {theme, setTheme} = useTheme();
@@ -21,7 +21,7 @@ export default function LoginPage({providers}: AuthProvidersInterface) {
     }, [session]);
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-100 dark:bg-neutral-900">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-50 dark:bg-neutral-900">
             <Card className="mx-8 w-full max-w-[360px] p-8 sm:max-w-xl">
                 <CardHeader className="flex flex-col items-center space-y-2">
                     <h2 className="text-5xl font-bold">Login</h2>

@@ -5,5 +5,8 @@ import {createPost} from "@/requests/createPost";
 import {toggleLikePost} from "@/requests/toggleLikePost";
 import {getCommentsPost} from "@/requests/getCommentsPost";
 import {createComment} from "@/requests/createComment";
+import {getStripePayment} from "@/requests/getStripePayment";
+import {getStripeProducts} from "@/requests/getStripeProducts";
+import {updateUserSubscriptionPlan} from "@/requests/updateUserSubscriptionPlan";
 
-export {askChatGPTForSuggestion, getAllPosts, createPost, deletePost, toggleLikePost, getCommentsPost, createComment}
+export {askChatGPTForSuggestion, getAllPosts, createPost, deletePost, toggleLikePost, getCommentsPost, createComment, getStripePayment, getStripeProducts, updateUserSubscriptionPlan}
