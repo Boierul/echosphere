@@ -23,11 +23,6 @@ export const authOptions: NextAuthOptions = {
             if (session?.user) {
                 session.user.id = user.id;
             }
-
-            // TODO: Implement once Stipe is added
-            // const userData = await fetch(`${process.env.NEXTAUTH_URL}/api/user?userId=${user.id}`)
-            //     .then(response => response.json());
-            // session.user.subscriptionStatus = userData.subscriptionStatus;
             return session;
         },
     },

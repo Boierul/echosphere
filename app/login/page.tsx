@@ -1,5 +1,5 @@
 import {getProviders} from "next-auth/react";
-import LoginPage from "@/app/login/LoginPage";
+import LoginPage from "@/app/login/components/LoginPage";
 
 export default async function Login() {
     // Get the auth providers

@@ -11,15 +11,18 @@ import {Badge} from "@/components/ui/badge";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
 
 import {useMediaQuery} from "@/hooks/useMediaQuery";
-import {getStripePayment, getStripeProducts} from "@/requests";
+import {getAllSubscribedUsers, getStripePayment, getStripeProducts} from "@/requests";
 import {useRouter} from "next/navigation";
 import {useSession} from "next-auth/react";
+import LoaderSmall from "@/components/LoaderSmall";
+import LoaderSmallInverted from "@/components/LoaderSmallInverted";
 
 export default function PlanCards() {
     /* ------------------------------------------------------------------------------------------------------------ */
     // Next-Auth data
 
     const {data: session} = useSession();
+    const {user} = session || {};
     const [isNotLogged, setIsNotLogged] = useState(true);
 
     // TextArea disabled only takes booleans
@@ -29,7 +32,33 @@ export default function PlanCards() {
         } else {
             setIsNotLogged(true)
         }
-        console.log(isNotLogged)
+    }, [session]);
+
+    /* ------------------------------------------------------------------------------------------------------------ */
+    const [isProUser, setIsProUser] = useState(false);
+
+    // Check if user has subscription
+    useEffect(() => {
+        async function fetchProUsers() {
+            try {
+                const res = await getAllSubscribedUsers();
+                // @ts-ignore
+                const proUser = res.find((pro:string) => pro.id === session.user.id);
+
+                if (proUser) {
+                    setIsProUser(true);
+                } else {
+                    setIsProUser(false);
+                }
+
+                console.log(isProUser)
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        fetchProUsers();
     }, [session]);
 
     /* ------------------------------------------------------------------------------------------------------------ */
@@ -42,7 +71,7 @@ export default function PlanCards() {
 
     // Fetch Stripe products
     useEffect(() => {
-        async function fetchData() {
+        async function fetchStripeProducts() {
             try {
                 const res = await getStripeProducts();
                 setStripeProducts(res)
@@ -52,7 +81,7 @@ export default function PlanCards() {
             }
         }
 
-        fetchData();
+        fetchStripeProducts();
     }, []);
 
 
@@ -100,7 +129,11 @@ export default function PlanCards() {
                         <div className="py-6">
                             <Button id="card-button" variant="secondary" className="text-sm w-full"
                                     disabled={true}>
-                                {isNotLogged ? "Log in first." : "Owned"}
+                                {session === null ? (
+                                    "Log in first."
+                                ) : (
+                                    session && user ? "Owned" : <LoaderSmall />
+                                )}
                             </Button>
                         </div>
 
@@ -130,7 +163,7 @@ export default function PlanCards() {
                         <h1 className="font-bold text-4xl">
                             Pro Plan
                         </h1>
-                        <Badge className="rounded-full">
+                        <Badge className="rounded-full bg-amber-400 dark:bg-yellow-500">
                             Pro
                         </Badge>
                     </CardHeader>
@@ -145,8 +178,11 @@ export default function PlanCards() {
 
                         <div className="py-6">
                             <Button id="card-button" variant="default" className="text-sm w-full"
-                                    disabled={isNotLogged} onClick={() => handlePayment()}>
-                                {isNotLogged ? "Log in first." : "Get Started"}
+                                    disabled={isNotLogged || isProUser} onClick={() => handlePayment()}>
+                                {isNotLogged ?
+                                    (session === null ? "Log in first." : <LoaderSmallInverted/>) :
+                                    (isProUser && user ? "Owned" : "Get Started")
+                                }
                             </Button>
                         </div>
 

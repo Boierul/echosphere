@@ -17,9 +17,9 @@ export default function Failure() {
     // Update Subscription for the user
     // Not the most efficient, but it works
     useEffect(() => {
-        if (!session) {
-            return;
-        }
+        // if (!user) {
+        //     router.push("/")
+        // }
 
         async function updateStatus() {
             try {
@@ -53,22 +53,7 @@ export default function Failure() {
                     </CardFooter>
                 </Card>
                 :
-                <div>
-                    <Card
-                        className="py-8 w-full max-w-lg flex-col justify-center items-center">
-                        <CardHeader>
-                            <CardTitle className="text-2xl sm:text-4xl">
-                                Please log in.
-                            </CardTitle>
-                            <CardDescription>
-                                In order to do this operation the user must be logged in.
-                            </CardDescription>
-                        </CardHeader>
-                        <CardFooter className="mt-4">
-                            <Button className="w-full" onClick={() => router.push("/login")}>Login</Button>
-                        </CardFooter>
-                    </Card>
-                </div>
+                <div/>
             }
         </div>)
 }

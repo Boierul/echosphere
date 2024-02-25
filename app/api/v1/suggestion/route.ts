@@ -23,7 +23,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
         return NextResponse.json(chatCompletion.choices[0].message);
     } catch (error) {
-        // TODO: Refactor status codes for more appropriate ones
         NextResponse.json(
             {message: `Error has occurred while enhancing your prompt: ${error}`},
             {status: 500}

@@ -21,3 +21,11 @@ export async function updateSubscriptionStatus(email: string, status: string) {
     })]);
     return updatedUser;
 }
+
+export async function getAllProUsers() {
+    const [users] = await Promise.all([prisma.user.findMany({
+        where: {subscriptionStatus : "active"}
+    })]);
+
+    return users;
+}

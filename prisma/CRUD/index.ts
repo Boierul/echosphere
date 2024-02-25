@@ -5,8 +5,8 @@ import {
     postSinglePostToDB,
     deleteSinglePostFromDB
 } from "@/prisma/CRUD/posts";
-import {getUser, updateSubscriptionStatus} from "@/prisma/CRUD/user"
-import {likePost,postAlreadyLiked, unlikePost} from "@/prisma/CRUD/like"
+import {getUser, updateSubscriptionStatus, getAllProUsers} from "@/prisma/CRUD/user"
+import {likePost, postAlreadyLiked, unlikePost} from "@/prisma/CRUD/like"
 import {addComment, getAllPostComments} from "@/prisma/CRUD/comment"
 
 export {
@@ -21,5 +21,6 @@ export {
     unlikePost,
     addComment,
     getAllPostComments,
-    updateSubscriptionStatus
+    updateSubscriptionStatus,
+    getAllProUsers
 }
