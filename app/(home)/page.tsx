@@ -10,7 +10,7 @@ async function getStars() {
 }
 
 export default async function Home() {
-    // const githubStars = await getStars();
+    const githubStars = await getStars();
     return (
         <main>
             <HomePage/>
