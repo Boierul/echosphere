@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Echosphere.
 
-## Getting Started
+Minimalistic full-stack webapplication that connect users around the world and spread their ideas.
 
-First, run the development server:
+[![Echosphere1.png](https://i.postimg.cc/dtnG11jd/Echosphere1.png)](https://postimg.cc/bsDZVqMN)
+[![Echosphere2.png](https://i.postimg.cc/NGncw8Wr/Echosphere6.png)](https://postimg.cc/gr35VhcY)
+[![Echosphere3.png](https://i.postimg.cc/vB1Nwt0Z/Echosphere7.png)](https://postimg.cc/N9c41mh3)
+[![Echosphere4.png](https://i.postimg.cc/m248m4WD/Echosphere12.png)](https://postimg.cc/fkHcb6Ln)
 
-```bash
+## Demo
+
+
+## Installation Instructions
+
+1. Clone the repository
+````markdown
+git clone https://github.com/Boierul/echosphere.git
+````
+2. Navigate to the project folder
+````markdown
+cd eth-arbitrage-backend
+````
+3. Install dependencies
+````markdown
+npm install
+````
+4. Start the development server
+````markdown
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+````
+5. Set up the environment variables by creating a `.env` file in the project root folder.
+Fill in the required values based on the example below.
+
+6. Open [http://localhost:3000](http://localhost:3000) to access the development website
+
+## Environtent variables
+
+```.env
+# -----------------------------------------------------------------------------
+# Application
+# -----------------------------------------------------------------------------
+BASE_URL=http://localhost:3000
+
+# -----------------------------------------------------------------------------
+# Authentication (NextAuth.js)
+# -----------------------------------------------------------------------------
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=""
+
+GITHUB_ID=""
+GITHUB_SECRET=""
+
+GOOGLE_CLIENT_ID=""
+GOOGLE_CLIENT_SECRET=""
+
+# -----------------------------------------------------------------------------
+# Database (PostgreSQL - Railway)
+# -----------------------------------------------------------------------------
+DATABASE_URL=postgresql://
+# If you get the Error: P1002 while npm run migrate:dev
+PRISMA_SCHEMA_DISABLE_ADVISORY_LOCK=false
+
+# -----------------------------------------------------------------------------
+# OpenAI ChatGPT
+# -----------------------------------------------------------------------------
+OPENAI_API_KEY=""
+
+# -----------------------------------------------------------------------------
+# Stripe
+# -----------------------------------------------------------------------------
+STRIPE_API_KEY=""
+STRIPE_SECRET_KEY=""
+STRIPE_WEBHOOK_SECRET=""
+STRIPE_SUBSCRIPTION_PRICE_ID=""
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
+1. View post from user all around the internet
+2. Share ideas in form of posts
+3. Maybe get some post suggestion from the ChatGPT suggestion button
+4. Comment every possible post
+5. Like posts that you enjoy
+6. Delete posts that you may think are not good enough
+7. Make a Stripe payment to get an awesome badge
+8. Login easily with GitHub or Google account
+9. Light/Dark Mode
 
-You can start editing the page by modifying `app/MobileNavigation.tsx`. The page auto-updates as you edit the file.
+## Technologies
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Next.js, TypeScript, TailwindCSS & shadcn/ui for minimalistic yet modern look
+2. PostgreSQL, PrismaORM for DB management
+3. Vercel & RailwayDB for cloud hosting
+4. OAuth 2.0 with Next-Auth for seamless authentication/authorization
+5. Stripe payments 
+6. OAuth 2.0 with Next-Auth
+7. ChatGPT integration for quick post suggestions
