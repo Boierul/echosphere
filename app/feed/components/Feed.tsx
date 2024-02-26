@@ -18,7 +18,7 @@ export default function Feed({posts}: FeedInterface) {
     const firstPostIndex = lastPostIndex - postsPerPage;
 
     // Extract the current posts to be displayed on the page
-    const currentPosts = posts.slice(firstPostIndex, lastPostIndex)
+    const currentPosts = posts?.slice(firstPostIndex, lastPostIndex)
 
     /* ------------------------------------------------------------------------------------------------------------ */
 
