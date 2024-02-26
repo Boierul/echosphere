@@ -110,7 +110,7 @@ export default function Post({
     useEffect(() => {
         if (isProUser.length === 0) {
             getProUsers();
-        }6
+        }
     }, [isProUser]);
 
 

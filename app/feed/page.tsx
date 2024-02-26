@@ -5,6 +5,7 @@ import Feed from "@/app/feed/components/Feed";
 
 import {getAllPosts} from "@/requests";
 
+
 async function getEveryPost() {
     const [posts] = await Promise.all([getAllPosts()]);
     return posts;
