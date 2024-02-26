@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build app": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "migrate:dev": "npx dotenv -e .env -- prisma migrate dev",
