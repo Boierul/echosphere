@@ -1,18 +1,15 @@
-import process from "process";
 import Spacer from "@/components/Spacer";
 import AddPost from "@/app/feed/components/AddPost";
 import Feed from "@/app/feed/components/Feed";
-
 import {getAllPosts} from "@/requests";
-
-
-async function getEveryPost() {
-    const [posts] = await Promise.all([getAllPosts()]);
-    return posts;
-}
 
 export default async function FeedPage() {
     const postsData = await getEveryPost();
+
+    async function getEveryPost() {
+        const [posts] = await Promise.all([getAllPosts()]);
+        return posts;
+    }
 
     return (
         <main>
