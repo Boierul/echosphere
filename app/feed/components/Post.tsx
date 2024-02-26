@@ -110,7 +110,7 @@ export default function Post({
     useEffect(() => {
         if (isProUser.length === 0) {
             getProUsers();
-        }
+        }6
     }, [isProUser]);
 
 
@@ -233,7 +233,7 @@ export default function Post({
                                 return (
                                     <motion.div
                                         key={proUser.id}
-                                        className="z-50 absolute ml-[28px] mb-10"
+                                        className="z-50 absolute ml-[30px] mt-[-34px]"
                                         initial={{opacity: 0}}
                                         animate={{opacity: 1}}
                                         transition={{duration: 0.3}}

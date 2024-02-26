@@ -29,6 +29,12 @@ export default function HomePage() {
         "images/Echosphere2.png",
         "images/Echosphere3.png",
         "images/Echosphere4.png",
+        "images/Echosphere5.png",
+        "images/Echosphere6.png",
+        "images/Echosphere7.png",
+        "images/Echosphere8.png",
+        "images/Echosphere9.png",
+        "images/Echosphere10.png",
     ];
 
     // Scroll to the top of the page each time page is accessed
