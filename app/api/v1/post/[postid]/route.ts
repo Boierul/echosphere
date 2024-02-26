@@ -1,7 +1,7 @@
 import {NextRequest, NextResponse} from "next/server";
 import {deleteSinglePostFromDB, findPostToDeleteFromDB, getSinglePostFromDB} from "@/prisma/CRUD";
 import {getServerSession} from "next-auth";
-import {authOptions} from "@/app/api/auth/[...nextauth]/route";
+import {authOptions} from "@/utils/authOptions";
 
 /* GET - get a single post from the DB */
 export async function GET(req: NextRequest, res: NextResponse) {

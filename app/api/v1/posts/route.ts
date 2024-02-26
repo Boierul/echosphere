@@ -2,7 +2,7 @@ import {NextRequest, NextResponse} from "next/server";
 import {getUser, postSinglePostToDB} from "@/prisma/CRUD";
 
 import {getServerSession} from "next-auth";
-import {authOptions} from "@/app/api/auth/[...nextauth]/route";
+import {authOptions} from "@/utils/authOptions";
 
 /* POST - add a posts to the DB */
 export async function POST(req: NextRequest, res: NextResponse) {
