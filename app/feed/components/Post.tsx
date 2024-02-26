@@ -233,7 +233,7 @@ export default function Post({
                                 return (
                                     <motion.div
                                         key={proUser.id}
-                                        className="z-50 absolute ml-[30px] mt-[-34px]"
+                                        className="z-20 absolute ml-[30px] mt-[-34px]"
                                         initial={{opacity: 0}}
                                         animate={{opacity: 1}}
                                         transition={{duration: 0.3}}
