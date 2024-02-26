@@ -1,10 +1,9 @@
 import * as React from "react"
 import Spacer from "@/components/Spacer";
-import {getAllPosts} from "@/requests";
 import TestPage from "@/app/test/TestPage";
 
 export default async function Test() {
-    const [postsData] = await Promise.all([getAllPosts()])
+    // const [postsData] = await Promise.all([getAllPosts()])
 
     return (
         <main>
