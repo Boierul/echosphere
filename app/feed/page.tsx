@@ -21,12 +21,12 @@ export default async function FeedPage() {
                 subscriptionId: null,
                 subscriptionStatus: null,
                 name: '279 487',
-                email: '279487via@gmail.com',
+                email: 'email@gmail.com',
                 emailVerified: null,
                 image: 'https://lh3.googleusercontent.com/a/ACg8ocIyuheTIud3VHfjJcDWU3GMHXl_HqEZaIYU_W_gAefm=s96-c'
             },
             likes: [],
-            comments: [ [Object] ]
+            comments: [ ]
         },
         {
             id: 'clt24xj9i000610rwx9f3prqu',
@@ -41,12 +41,12 @@ export default async function FeedPage() {
                 subscriptionId: null,
                 subscriptionStatus: 'active',
                 name: 'Dan Pintea',
-                email: 'pintea.dan988@gmail.com',
+                email: 'email2@gmail.com',
                 emailVerified: null,
                 image: 'https://avatars.githubusercontent.com/u/49337867?v=4'
             },
-            likes: [ [Object] ],
-            comments: [ [Object] ]
+            likes: [],
+            comments: []
         }
     ]
 
