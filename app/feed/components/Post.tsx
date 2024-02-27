@@ -111,7 +111,7 @@ export default function Post({
         if (isProUser.length === 0) {
             getProUsers();
         }
-    }, [isProUser]);
+    }, []);
 
 
     const getProUsers = async () => {

@@ -7,7 +7,7 @@ export default async function FeedPage() {
     const postsData = await getEveryPost();
 
     async function getEveryPost() {
-        const [posts] = await Promise.all([getAllPosts()]);
+        const [posts] = await Promise.all([getAllPosts(), { cache: 'no-store' }]);
         return posts;
     }
 
