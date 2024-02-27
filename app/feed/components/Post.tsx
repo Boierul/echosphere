@@ -144,6 +144,7 @@ export default function Post({
 
             const data = await res.json();
             setAllComments(data)
+            router.refresh();
 
             setLoading(false);
         } catch (error) {
