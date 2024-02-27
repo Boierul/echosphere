@@ -2,11 +2,30 @@
 
 import Post from "@/app/feed/components/Post";
 import {FeedInterface} from "@/types";
+import * as React from "react";
 import {useState} from "react";
 import PaginationSectionPost from "@/components/PaginationSectionPost";
-import * as React from "react";
 
 export default function Feed({posts}: FeedInterface) {
+    /* ------------------------------------------------------------------------------------------------------------ */
+    // // Post Fetching
+    //
+    // const [postsData, setPostsData] = useState<FeedInterface[]>([]);
+    //
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         const [posts] = await Promise.all([getAllPosts()]);
+    //         setPostsData(posts);
+    //     };
+    //
+    //     fetchData();
+    // }, []);
+    //
+    // // Use another useEffect to log updated postsData
+    // useEffect(() => {
+    //     console.log(postsData);
+    // }, [postsData]);
+
     /* ------------------------------------------------------------------------------------------------------------ */
     // Pagination
 
