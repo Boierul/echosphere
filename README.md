@@ -9,23 +9,25 @@ Minimalistic full-stack webapplication that connect users around the world and s
 
 ## Demo
 
+https://github.com/Boierul/echosphere/assets/49337867/61436dd8-43ea-4e55-a217-4df25d5fe204
+
 
 ## Installation Instructions
 
 1. Clone the repository
-````markdown
+````bash
 git clone https://github.com/Boierul/echosphere.git
 ````
 2. Navigate to the project folder
-````markdown
+````bash
 cd eth-arbitrage-backend
 ````
 3. Install dependencies
-````markdown
+````bash
 npm install
 ````
 4. Start the development server
-````markdown
+````bash
 npm run dev
 ````
 5. Set up the environment variables by creating a `.env` file in the project root folder.
