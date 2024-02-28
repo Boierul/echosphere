@@ -1,8 +1,11 @@
 import {NextRequest, NextResponse} from "next/server";
 import {getAllProUsers} from "@/prisma/CRUD";
+import {unstable_noStore as noStore} from 'next/cache';
 
 /* GET - get all pro users  */
 export async function GET(req: NextRequest, res: NextResponse) {
+    noStore();
+
     try {
         const proUsers = await getAllProUsers();
 

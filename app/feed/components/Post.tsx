@@ -106,12 +106,11 @@ export default function Post({
     const [isProUser, setIsProUser] = useState([]);
 
     // Pro user badge
-    // For some reason this re-renders 5+ times
     useEffect(() => {
         if (isProUser.length === 0) {
             getProUsers();
         }
-    }, []);
+    }, [isProUser.length]);
 
 
     const getProUsers = async () => {

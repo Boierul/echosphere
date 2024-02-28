@@ -17,6 +17,11 @@ import {useSession} from "next-auth/react";
 import LoaderSmall from "@/components/LoaderSmall";
 import LoaderSmallInverted from "@/components/LoaderSmallInverted";
 
+// To avoid the TS error on line 49/50
+interface User {
+    id: string;
+}
+
 export default function PlanCards() {
     /* ------------------------------------------------------------------------------------------------------------ */
     // Next-Auth data
@@ -41,9 +46,8 @@ export default function PlanCards() {
     useEffect(() => {
         async function fetchProUsers() {
             try {
-                const res = await getAllSubscribedUsers();
-                // @ts-ignore
-                const proUser = res.find((pro:string) => pro.id === session.user.id);
+                const res: User[] = await getAllSubscribedUsers();
+                const proUser = res.find((pro: User) => pro.id === session?.user.id);
 
                 if (proUser) {
                     setIsProUser(true);
@@ -51,15 +55,13 @@ export default function PlanCards() {
                     setIsProUser(false);
                 }
 
-                console.log(isProUser)
-
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         }
 
         fetchProUsers();
-    }, [session]);
+    }, [session, isProUser]);
 
     /* ------------------------------------------------------------------------------------------------------------ */
 
@@ -132,7 +134,7 @@ export default function PlanCards() {
                                 {session === null ? (
                                     "Log in first."
                                 ) : (
-                                    session && user ? "Owned" : <LoaderSmall />
+                                    session && user ? "Owned" : <LoaderSmall/>
                                 )}
                             </Button>
                         </div>

@@ -1,5 +1,9 @@
 import {NextResponse} from "next/server";
 import {getAllPostsFromDB} from "@/prisma/CRUD";
+
+// Solves the caching request and allows dynamic SSR
+// export const dynamic = "force-dynamic";
+// or
 import {unstable_noStore as noStore} from 'next/cache';
 
 /* GET - get all posts from the DB */

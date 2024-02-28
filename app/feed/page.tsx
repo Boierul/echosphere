@@ -9,9 +9,6 @@ import Feed from "@/app/feed/components/Feed";
 import {getAllPosts} from "@/requests";
 
 export default async function FeedPage() {
-    // Solves the caching request and allows dynamic SSR
-    noStore();
-
     const postsData = await getEveryPost();
 
     async function getEveryPost() {
