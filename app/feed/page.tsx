@@ -1,7 +1,7 @@
 // Solves the caching request and allows dynamic SSR
 // export const dynamic = "force-dynamic";
 // or
-import {unstable_noStore} from "next/cache";
+import {unstable_noStore as noStore} from 'next/cache';
 
 import Spacer from "@/components/Spacer";
 import AddPost from "@/app/feed/components/AddPost";
@@ -10,7 +10,7 @@ import {getAllPosts} from "@/requests";
 
 export default async function FeedPage() {
     // Solves the caching request and allows dynamic SSR
-    unstable_noStore();
+    noStore();
 
     const postsData = await getEveryPost();
 
