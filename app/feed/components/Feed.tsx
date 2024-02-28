@@ -8,25 +8,6 @@ import PaginationSectionPost from "@/components/PaginationSectionPost";
 
 export default function Feed({posts}: FeedInterface) {
     /* ------------------------------------------------------------------------------------------------------------ */
-    // // Post Fetching
-    //
-    // const [postsData, setPostsData] = useState<FeedInterface[]>([]);
-    //
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const [posts] = await Promise.all([getAllPosts()]);
-    //         setPostsData(posts);
-    //     };
-    //
-    //     fetchData();
-    // }, []);
-    //
-    // // Use another useEffect to log updated postsData
-    // useEffect(() => {
-    //     console.log(postsData);
-    // }, [postsData]);
-
-    /* ------------------------------------------------------------------------------------------------------------ */
     // Pagination
 
     const [currentPage, setCurrentPage] = useState(1);

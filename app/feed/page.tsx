@@ -1,3 +1,8 @@
+// Solves the caching request and allows dynamic SSR
+// export const dynamic = "force-dynamic";
+// or
+import {unstable_noStore} from "next/cache";
+
 import Spacer from "@/components/Spacer";
 import AddPost from "@/app/feed/components/AddPost";
 import Feed from "@/app/feed/components/Feed";

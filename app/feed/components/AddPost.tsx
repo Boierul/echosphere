@@ -16,7 +16,6 @@ import {createPost} from "@/requests/createPost";
 import {askChatGPTForSuggestion} from "@/requests";
 import Loader from "@/components/Loader";
 import LoaderInverted from "@/components/LoaderInverted";
-import {getAllPostsClient} from "@/requests/getAllPostsClient";
 
 // Filter profanities
 const filter = new Filter();
@@ -107,7 +106,6 @@ export default function AddPost() {
                 message: "",
             })
             setContent("");
-            await getEveryPost();
             setLoading(false)
             router.refresh();
         }
@@ -117,11 +115,6 @@ export default function AddPost() {
             description: "You shared a great idea.",
             duration: 2000
         })
-    }
-
-    async function getEveryPost() {
-        const [posts] = await Promise.all([getAllPostsClient(), { cache: 'no-store' }]);
-        return posts;
     }
 
     return (
